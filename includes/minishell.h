@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/08 12:17:51 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/08 14:39:19 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,27 @@
 # include <termios.h>
 # include "../libft/libft.h"
 
+typedef struct s_envs
+{
+	char			*key;
+	char			*value;
+	struct s_envs	*next;
+}	t_envs;
+
 typedef struct s_minishell
 {
-	char	**m_envp;
+	t_envs	*envs;
 }	t_minishell;
 
 //minishell_utils.c
 char	*ft_exist(char **envp, char *cmd);
-int     ft_dup(int old, int newfd);
-int     ft_fork(void);
+int		ft_dup(int old, int newfd);
+int		ft_fork(void);
 //pipes_and_pids.c
-int	**ft_piping(int count);
-int	*ft_piding(int count);
+int		**ft_piping(int count);
+int		*ft_piding(int count);
+//envp.c
+void	envp_to_dict(t_envs **envs, char **envp);
+char	*search_envs(t_envs **envs, char *key);
 
 #endif

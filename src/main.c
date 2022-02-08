@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/08 12:22:37 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/08 14:41:58 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ int	main(int argc, char **argv, char **envp)
 	char	*str;
 	t_minishell	m_shell;
 
-	ft_memset(&m_shell, 0, sizeof(m_shell));
 	(void) argc;
 	(void) argv;
-	m_shell.m_envp = envp;
+	ft_memset(&m_shell, 0, sizeof(m_shell));
+	envp_to_dict(&m_shell.envs, envp);
+	printf("%s\n", search_envs(&m_shell.envs, "PWD"));
 	while (true)
 	{
 		str = readline("minishell $ ");
