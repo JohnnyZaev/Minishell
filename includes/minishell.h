@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/07 16:29:13 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/08 10:43:31 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <termios.h>
+# include "../libft/libft.h"
 
 #endif
