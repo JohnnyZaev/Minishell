@@ -6,7 +6,7 @@
 #    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/08 14:49:02 by gvarys           ###   ########.fr        #
+#    Updated: 2022/02/09 13:03:35 by gvarys           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,10 @@ HEADER				=	$(HEADER_DIR)minishell.h
 SRC_FILES			=	main.c\
 						utils/minishell_utils.c\
 						utils/pipes_and_pids.c\
+						utils/error.c\
 						envs/envs.c\
-					
+						signals/signals.c\
+						
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))
 
@@ -40,7 +42,7 @@ $(LIBFT)			:
 							make -C $(LIBFT_DIR)
 
 $(NAME)				:	$(OBJS)
-							$(CC) $(CFLAGS)  -lreadline -L$(LIBFT_DIR) -lft $(OBJS) -o $@
+							$(CC) $(CFLAGS)  -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
 
 %.o					:	%.c $(HEADER)
 							$(CC) $(CFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/08 14:39:19 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/09 12:57:46 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,13 @@ int		*ft_piding(int count);
 //envp.c
 void	envp_to_dict(t_envs **envs, char **envp);
 char	*search_envs(t_envs **envs, char *key);
+//signals
+void	start_signals(void);
+
+//readline prototypes
+void	rl_replace_line(const char *text, int clear_undo);
+
+//errors
+int		error(int err);
 
 #endif

@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_and_pids.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:00:45 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/08 12:22:54 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:52:48 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//создание массива пайпов (каждый пайп это int pipe[2] - массив из двух элементов)
+//создание массива пайпов
+//(каждый пайп это int pipe[2] - массив из двух элементов)
 int	**ft_piping(int count)
 {
 	int	i;
 	int	**p_pipes;
 
 	i = -1;
-    if (count == 0)
-        return NULL;
+	if (count == 0)
+		return (NULL);
 	p_pipes = (int **)malloc(sizeof(int *) * (count + 1));
 	if (p_pipes == NULL)
 		return (NULL);

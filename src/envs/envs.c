@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:53:49 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/08 14:51:38 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/09 12:55:29 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*search_envs(t_envs **envs, char *key)
 {
-	t_envs *temp;
+	t_envs	*temp;
 
 	if (!envs || !(*envs) || !key)
 		return (0);
@@ -34,29 +34,28 @@ static t_envs	*create_envs_dict(char *envp)
 	int		j;
 	t_envs	*new;
 
-	if (!(new = (t_envs *) malloc(sizeof(t_envs))))
-		exit(1); // create error func
+	new = (t_envs *) malloc(sizeof(t_envs));
+	if (!new)
+		exit(error(1));
 	i = 0;
 	while (envp[i] != '=')
 		i++;
 	new->key = ft_substr(envp, 0, i);
 	if (!new->key)
-		exit(1); // create error func
+		exit(error(1));
 	j = i + 1;
 	while (envp[j] != '\0' && envp[j] != '\n')
 		j++;
 	new->value = ft_substr(envp, i + 1, j - i);
 	if (!new->value)
-		exit(1); // create error func
+		exit(error(1));
 	new->next = 0;
 	return (new);
-	
 }
 
 static void	parce_envp(t_envs **envs, char *envp)
 {
-	t_envs *temp;
-
+	t_envs	*temp;
 
 	if (!(*envs))
 	{
