@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 15:43:03 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/10 16:21:12 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	parse_str(t_minishell *m_shell, char *str)
 		exit(error(1));
 	if (ft_strlen(str_temp) == 0)
 		return ;
-	str_split = ft_split(str_temp, ' ');
+	str_split = ft_split_max(str, "|;");
 	if (!str_split)
 		exit(error(1));
 	free(str_temp);

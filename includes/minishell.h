@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 15:36:14 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/10 16:21:00 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/syslimits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <editline/readline.h>
 # include <stdbool.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -29,6 +30,7 @@
 # include <termios.h>
 # include "../libft/libft.h"
 
+# define NOTHIN 0
 # define PIPE 1
 # define REDIRECT 2
 # define BIN 3
@@ -83,5 +85,8 @@ int		error(int err);
 //SHIT PARSER
 void	parse_str(t_minishell *m_shell, char *str);
 void	free_str_exe(t_str_exe *str_exe);
+
+//ft_split_max.c
+char	**ft_split_max(char *str, char *charset);
 
 #endif
