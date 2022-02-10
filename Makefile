@@ -6,7 +6,7 @@
 #    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/09 13:03:35 by gvarys           ###   ########.fr        #
+#    Updated: 2022/02/09 16:58:36 by gvarys           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_FILES			=	main.c\
 						utils/error.c\
 						envs/envs.c\
 						signals/signals.c\
+						parser/parser.c\
 						
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))

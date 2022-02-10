@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/09 12:57:46 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/09 16:58:18 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@
 # include <termios.h>
 # include "../libft/libft.h"
 
+# define PIPE 1
+# define REDIRECT 2
+# define BIN 3
+
+typedef struct s_str_exe
+{
+	char	*str_exe;
+	int		type;
+	struct s_str_exe	*prev;
+	struct s_str_exe	*next;
+}	t_str_exe;
+
 typedef struct s_envs
 {
 	char			*key;
@@ -38,7 +50,8 @@ typedef struct s_envs
 
 typedef struct s_minishell
 {
-	t_envs	*envs;
+	t_envs		*envs;
+	t_str_exe	*str_exe;
 }	t_minishell;
 
 //minishell_utils.c
@@ -59,5 +72,8 @@ void	rl_replace_line(const char *text, int clear_undo);
 
 //errors
 int		error(int err);
+
+//SHIT PARSER
+void	parse_str(t_minishell *m_shell, char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/09 13:00:03 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/09 17:14:21 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ int	main(int argc, char **argv, char **envp)
 		ft_tty_mask();
 		start_signals();
 		str = readline("minishell $ ");
+		if (!str)
+			exit(error(2));
+		add_history(str);
+		parse_str(&m_shell, str);
+		while (m_shell.str_exe)
+		{
+			printf("STR -> %s, TYPE -> %d\n", m_shell.str_exe->str_exe, m_shell.str_exe->type);
+			m_shell.str_exe = m_shell.str_exe->next;
+		}
 		execute_process(str, envp);
 		free(str);
 	}
