@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 15:53:48 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/10 17:06:45 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@
 
 # define NOTHIN 0
 # define PIPE 1
-# define REDIRECT 2
-# define BIN 3
+# define BIN 2
+# define REDIRECT_IN 3
+# define REDIRECT_OUT 4
+# define HEREDOC 5
+# define REDIRECT_AP 6
 
 typedef struct s_str_exe
 {

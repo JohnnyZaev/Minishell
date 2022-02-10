@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_line_handler.c                             :+:      :+:    :+:   */
+/*   ft_split_max.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 13:07:17 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/10 15:52:14 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/10 17:23:25 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,12 @@ static void	write_word(char *dest, char *from, char *charset)
 	i = 0;
 	if (char_is_separator(from[0], charset) == 1)
 	{
-	    dest[0] = from[0];
-	    dest[1] = '\0';
+	    while (char_is_separator(from[i], charset) == 1)
+		{
+	        dest[i] = from[i];
+			i++;
+		}
+	    dest[i] = '\0';
 	    return ;
 	}
 	while (char_is_separator(from[i], charset) == 0)
@@ -81,7 +85,10 @@ static void	write_split(char **split, char *str, char *charset)
 		while (char_is_separator(str[i + j], charset) == 0)
 			j++;
 		if (char_is_separator(str[i + j], charset) == 1 && j == 0)
-		    j = 1;
+		{
+			while(char_is_separator(str[i + j], charset) == 1)
+				j++;
+		}
 		split[word] = (char*)malloc(sizeof(char) * (j + 1));
 		write_word(split[word], str + i, charset);
 		i += j;
@@ -100,3 +107,17 @@ char	**ft_split_max(char *str, char *charset)
 	write_split(res, str, charset);
 	return (res);
 }
+
+// int main()
+// {
+// 	int i = 0;
+// 	char **spt;
+// 	char str[] = "grep j | wc -l >> toto.txt";
+
+// 	spt = ft_split_max(str, "<|;");
+// 	while(spt[i])
+// 	{
+// 		printf("elem - %s\n", spt[i]);
+// 		i++;
+// 	}
+// }
