@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:38:24 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/08 12:23:06 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:59:07 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,14 @@ int	ft_fork(void)
 		exit(EXIT_FAILURE);
 	}
 	return (pid);
+}
+
+//простой вызов pipe обернутый обработкой ошибок
+void	ft_pipe(int *fd)
+{
+	if (pipe(fd) == -1)
+	{
+		ft_putstr_fd("pipe creation failed\n", 2);
+		exit(EXIT_FAILURE);
+	}
 }

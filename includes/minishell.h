@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/08 12:17:51 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:47:21 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,14 @@ char	*ft_exist(char **envp, char *cmd);
 int     ft_dup(int old, int newfd);
 int     ft_fork(void);
 //pipes_and_pids.c
-int	**ft_piping(int count);
-int	*ft_piding(int count);
+int		**ft_piping(int count);
+int		*ft_piding(int count);
+void	ft_pipe(int *fd);
+void	pipe_welding(int *pipe1, int *pipe2);
+//execute_and_redirects.c
+void	execute_process(char *c_line, char **envp);
+void	read_redirect(int fd_out, char *file_path);
+void	write_redirect(int fd_in, char *file_path);
+void	read_heredoc_process(char *stop, int fd);
 
 #endif

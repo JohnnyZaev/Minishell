@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:00:45 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/08 12:22:54 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/08 15:09:05 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,15 @@ int	*ft_piding(int count)
 	i = 0;
 	p_pids = (int *)malloc(sizeof(int) * count);
 	return (p_pids);
+}
+
+//перенаправляем вывод одной трубы на вывод другой трубы
+void	pipe_welding(int *pipe1, int *pipe2)
+{
+	close(pipe1[1]);
+	ft_dup(pipe1[0], 0);
+	close(pipe1[0]);
+	close(pipe2[0]);
+	ft_dup(pipe2[1], 1);
+	close(pipe2[1]);
 }

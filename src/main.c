@@ -6,52 +6,48 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/08 12:22:37 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/10 11:39:21 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//перенаправляем вывод одной трубы на вывод другой трубы
-void	pipe_welding(int *pipe1, int *pipe2)
-{
-	close(pipe1[1]);
-	ft_dup(pipe1[0], 0);
-	close(pipe1[0]);
-	close(pipe2[0]);
-	ft_dup(pipe2[1], 1);
-	close(pipe2[1]);
-}
-
-//запускает бинарник
-void    execute_process(char *c_line, char **envp)
-{
-    int     fork_id;
-    char	**argVec1;
-
-    fork_id = fork();
-    if (fork_id == 0)
-    {
-	    argVec1 = ft_split(c_line, ' ');
-	    execve(ft_exist(envp, argVec1[0]), argVec1, NULL);
-        exit(EXIT_SUCCESS);
-    }
-    waitpid(fork_id, NULL, 0);
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	char	*str;
-	t_minishell	m_shell;
+	int		pid1;
+	int		pid2;
+	int		pipe[2];
 
-	ft_memset(&m_shell, 0, sizeof(m_shell));
 	(void) argc;
-	(void) argv;
-	m_shell.m_envp = envp;
+	// (void) argv;
+	(void) envp;
 	while (true)
 	{
-		str = readline("minishell $ ");
-		execute_process(str, envp);
+		str = readline("minishell$");
+		ft_pipe(pipe);
+		pid1 = ft_fork();
+		if (pid1 == 0)
+		{
+			read_redirect(1, argv[1]);
+			ft_dup(pipe[1], 1);
+			close(pipe[0]);
+			close(pipe[1]);
+			execute_process(argv[2], envp);
+		}
+		pid2 = ft_fork();
+		if (pid2 == 0)
+		{
+			write_redirect(pipe[0], argv[4]);
+			ft_dup(pipe[0], 0);
+			close(pipe[0]);
+			close(pipe[1]);
+			execute_process(argv[3], envp);
+		}
+ 		close(pipe[0]);
+ 		close(pipe[1]);
+		waitpid(pid1, NULL, 0);
+		waitpid(pid2, NULL, 0);
 		free(str);
 	}
 	return (0);
