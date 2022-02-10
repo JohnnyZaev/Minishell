@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 11:37:12 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/10 15:43:03 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,39 @@ static void	parse_handler(t_minishell *m_shell, char **str)
 void	parse_str(t_minishell *m_shell, char *str)
 {
 	char	**str_split;
+	char	*str_temp;
+	int		i;
 
-	str = ft_strtrim(str, " \t");
-	if (!str)
-		exit(error(2));
-	if (ft_strlen(str) == 0)
+	str_temp = ft_strtrim(str, " \t");
+	if (!str_temp)
+		exit(error(1));
+	if (ft_strlen(str_temp) == 0)
 		return ;
-	str_split = ft_split(str, ' ');
+	str_split = ft_split(str_temp, ' ');
 	if (!str_split)
-		exit(error(2));
+		exit(error(1));
+	free(str_temp);
 	parse_handler(m_shell, str_split);
+	i = -1;
+	while(str_split[++i])
+	{
+		str_temp = str_split[i];
+		free(str_temp);
+	}
+	free(str_split);
+}
+
+void	free_str_exe(t_str_exe *str_exe)
+{
+	t_str_exe *temp;
+
+	while (str_exe)
+	{
+		temp = str_exe;
+		str_exe = str_exe->next;
+		if (temp->str_exe)
+			free(temp->str_exe);
+		if (temp)
+			free(temp);
+	}
 }

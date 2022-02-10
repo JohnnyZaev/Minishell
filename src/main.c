@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 11:50:39 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:40:36 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static	void print_str_exe(t_str_exe *str_exe)
+{
+	while (str_exe)
+	{
+		printf("STR -> %s, TYPE -> %d\n", str_exe->str_exe, str_exe->type);
+		str_exe = str_exe->next;
+	}
+}
 
 static void	ft_tty_mask(void)
 {
@@ -39,13 +48,10 @@ int	main(int argc, char **argv, char **envp)
 			exit(error(2));
 		add_history(str);
 		parse_str(&m_shell, str);
-		while (m_shell.str_exe)
-		{
-			printf("STR -> %s, TYPE -> %d\n", m_shell.str_exe->str_exe, m_shell.str_exe->type);
-			m_shell.str_exe = m_shell.str_exe->next;
-		}
-		execute_process(str, envp);
+		print_str_exe(m_shell.str_exe);
+		// execute_process(str, envp);
 		free(str);
+		free_str_exe(m_shell.str_exe);
 	}
 	return (0);
 }
