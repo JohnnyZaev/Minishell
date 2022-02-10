@@ -6,7 +6,7 @@
 #    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/10 11:53:07 by ereginia         ###   ########.fr        #
+#    Updated: 2022/02/10 15:54:39 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC_FILES			=	main.c\
 						utils/pipes_and_pids.c\
 						utils/execute_and_redirects.c\
 						utils/error.c\
+						utils/ft_split_max.c\
 						envs/envs.c\
 						signals/signals.c\
 						parser/parser.c\
@@ -43,7 +44,7 @@ $(LIBFT)			:
 							make -C $(LIBFT_DIR)
 
 $(NAME)				:	$(OBJS)
-							$(CC) $(CFLAGS)  -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
+							$(CC) $(CFLAGS)  -lreadline -L/Users/ereginia/.brew/opt/readline/lib -I/Users/ereginia/.brew/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
 
 %.o					:	%.c $(HEADER)
 							$(CC) $(CFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 11:50:39 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/10 13:05:36 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int argc, char **argv, char **envp)
 			printf("STR -> %s, TYPE -> %d\n", m_shell.str_exe->str_exe, m_shell.str_exe->type);
 			m_shell.str_exe = m_shell.str_exe->next;
 		}
-		execute_process(str, envp);
 		free(str);
 	}
 	return (0);

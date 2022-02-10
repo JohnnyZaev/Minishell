@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:38:24 by ereginia          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/02/09 12:59:07 by ereginia         ###   ########.fr       */
-=======
-/*   Updated: 2022/02/09 12:50:45 by gvarys           ###   ########.fr       */
->>>>>>> 985716ec5a13dd2da6fc35ef1b7122b818041189
+/*   Updated: 2022/02/10 11:56:33 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +71,6 @@ int	ft_fork(void)
 	}
 	return (pid);
 }
-<<<<<<< HEAD
 
 //простой вызов pipe обернутый обработкой ошибок
 void	ft_pipe(int *fd)
@@ -86,5 +81,3 @@ void	ft_pipe(int *fd)
 		exit(EXIT_FAILURE);
 	}
 }
-=======
->>>>>>> 985716ec5a13dd2da6fc35ef1b7122b818041189
