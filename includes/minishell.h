@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 17:06:45 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/10 17:33:26 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int		error(int err);
 
 //SHIT PARSER
 void	parse_str(t_minishell *m_shell, char *str);
+void	free_str_exe(t_str_exe *str_exe);
 
 //ft_split_max.c
 char	**ft_split_max(char *str, char *charset);
