@@ -6,48 +6,45 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 11:39:21 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/10 11:50:39 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+static void	ft_tty_mask(void)
+{
+	struct termios	sterm;
+
+	tcgetattr(0, &sterm);
+	sterm.c_lflag &= ~ECHOCTL;
+	tcsetattr(0, 0, &sterm);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
-	char	*str;
-	int		pid1;
-	int		pid2;
-	int		pipe[2];
+	char		*str;
+	t_minishell	m_shell;
 
 	(void) argc;
-	// (void) argv;
-	(void) envp;
+	ft_memset(&m_shell, 0, sizeof(m_shell));
+	envp_to_dict(&m_shell.envs, envp);
+	printf("%s\n", search_envs(&m_shell.envs, argv[1]));
 	while (true)
 	{
-		str = readline("minishell$");
-		ft_pipe(pipe);
-		pid1 = ft_fork();
-		if (pid1 == 0)
+		ft_tty_mask();
+		start_signals();
+		str = readline("minishell $ ");
+		if (!str)
+			exit(error(2));
+		add_history(str);
+		parse_str(&m_shell, str);
+		while (m_shell.str_exe)
 		{
-			read_redirect(1, argv[1]);
-			ft_dup(pipe[1], 1);
-			close(pipe[0]);
-			close(pipe[1]);
-			execute_process(argv[2], envp);
+			printf("STR -> %s, TYPE -> %d\n", m_shell.str_exe->str_exe, m_shell.str_exe->type);
+			m_shell.str_exe = m_shell.str_exe->next;
 		}
-		pid2 = ft_fork();
-		if (pid2 == 0)
-		{
-			write_redirect(pipe[0], argv[4]);
-			ft_dup(pipe[0], 0);
-			close(pipe[0]);
-			close(pipe[1]);
-			execute_process(argv[3], envp);
-		}
- 		close(pipe[0]);
- 		close(pipe[1]);
-		waitpid(pid1, NULL, 0);
-		waitpid(pid2, NULL, 0);
+		execute_process(str, envp);
 		free(str);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 #    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/08 14:40:10 by ereginia         ###   ########.fr        #
+#    Updated: 2022/02/10 11:53:07 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,10 @@ SRC_FILES			=	main.c\
 						utils/minishell_utils.c\
 						utils/pipes_and_pids.c\
 						utils/execute_and_redirects.c\
-						
-					
+						utils/error.c\
+						envs/envs.c\
+						signals/signals.c\
+						parser/parser.c\
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))
 
@@ -41,7 +43,7 @@ $(LIBFT)			:
 							make -C $(LIBFT_DIR)
 
 $(NAME)				:	$(OBJS)
-							$(CC) -I includes $(CFLAGS)  -lreadline -L$(LIBFT_DIR) -lft $(OBJS) -o $@
+							$(CC) $(CFLAGS)  -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
 
 %.o					:	%.c $(HEADER)
 							$(CC) $(CFLAGS) -c $< -o $@

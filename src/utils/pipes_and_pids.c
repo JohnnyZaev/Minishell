@@ -6,21 +6,22 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:00:45 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/08 15:09:05 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/10 11:51:12 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//создание массива пайпов (каждый пайп это int pipe[2] - массив из двух элементов)
+//создание массива пайпов
+//(каждый пайп это int pipe[2] - массив из двух элементов)
 int	**ft_piping(int count)
 {
 	int	i;
 	int	**p_pipes;
 
 	i = -1;
-    if (count == 0)
-        return NULL;
+	if (count == 0)
+		return (NULL);
 	p_pipes = (int **)malloc(sizeof(int *) * (count + 1));
 	if (p_pipes == NULL)
 		return (NULL);
@@ -63,3 +64,4 @@ void	pipe_welding(int *pipe1, int *pipe2)
 	ft_dup(pipe2[1], 1);
 	close(pipe2[1]);
 }
+
