@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 16:30:30 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 10:18:04 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ static int	type_searcher(char *str)
 		return (PIPE);
 	if (!(ft_strncmp(str, ";", 2)))
 		return (BIN);
+	if (!(ft_strncmp(str, "<", 2)))
+		return (REDIRECT_IN);
+	else if (!(ft_strncmp(str, "<<", 3)))
+		return (HEREDOC);
+	if (!(ft_strncmp(str, ">", 2)))
+		return (REDIRECT_OUT);
+	else if (!(ft_strncmp(str, ">>", 3)))
+		return (REDIRECT_AP);
 	return (0);
 }
 
@@ -97,7 +105,7 @@ void	parse_str(t_minishell *m_shell, char *str)
 		exit(error(1));
 	if (ft_strlen(str_temp) == 0)
 		return ;
-	str_split = ft_split_max(str, "|;");
+	str_split = ft_split_max(str, "><|;");
 	if (!str_split)
 		exit(error(1));
 	free(str_temp);

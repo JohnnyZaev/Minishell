@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/15 18:11:51 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 10:18:09 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@
 
 # define NOTHIN 0
 # define PIPE 1
-# define REDIRECT 2
-# define BIN 3
+# define BIN 2
+# define REDIRECT_IN 3
+# define REDIRECT_OUT 4
+# define HEREDOC 5
+# define REDIRECT_AP 6
 
 typedef struct s_str_exe
 {
