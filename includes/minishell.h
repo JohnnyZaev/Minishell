@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 17:33:26 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/15 17:58:39 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_pipe(int *fd);
 void	pipe_welding(int *pipe1, int *pipe2);
 //execute_and_redirects.c
 void	execute_process(char *c_line, char **envp);
-void	read_redirect(int fd_out, char *file_path);
+void	read_redirect(char *file_path);
 void	write_redirect(int fd_in, char *file_path);
 void	read_heredoc_process(char *stop, int fd);
 //envp.c
@@ -85,11 +85,21 @@ void	rl_replace_line(const char *text, int clear_undo);
 //errors
 int		error(int err);
 
-//SHIT PARSER
-void	parse_str(t_minishell *m_shell, char *str);
-void	free_str_exe(t_str_exe *str_exe);
+// parser/parser.c
+int			type_searcher(char *str);
+void		parse_str(t_minishell *m_shell, char *str);
+void		str_exe_addback(t_str_exe **str_exe, t_str_exe *new);
+void		free_str_exe(t_str_exe *str_exe);
+t_str_exe	*create_str_exe(char *content);
+// parser/parser_utils.c
+void	parse_handler(t_minishell *m_shell, char **str);
 
-//ft_split_max.c
-char	**ft_split_max(char *str, char *charset);
+// utils/ft_split_max.c
+char	**ft_split_max(char *str, char *charset, char sep);
+// utils/substr_max.c
+char	*ft_substr_max(char *str);
+
+// utils/clean.c
+void	free_split(char **tofree);
 
 #endif

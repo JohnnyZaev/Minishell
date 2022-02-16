@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:38:24 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/10 16:21:23 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/13 12:18:06 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ char	*ft_exist(char **envp, char *cmd)
 		free(buf);
 		if (!access(buf2, 0))
 		{
-			free(path);
+			free_split(path);
 			return (buf2);
 		}
 		free(buf2);
 		i++;
 	}
-	free(path);
+	free_split(path);
 	return (NULL);
 }
 
