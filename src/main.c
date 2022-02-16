@@ -6,23 +6,23 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 13:07:48 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:36:58 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	void print_str_exe(t_str_exe *str_exe)
-{
-	t_str_exe *buf;
+// static	void print_str_exe(t_str_exe *str_exe)
+// {
+// 	t_str_exe *buf;
 
-	buf = str_exe;
-	while (buf)
-	{
-		printf("STR -> %s, TYPE -> %d\n", buf->str_exe, buf->type);
-		buf = buf->next;
-	}
-}
+// 	buf = str_exe;
+// 	while (buf)
+// 	{
+// 		printf("STR -> %s, TYPE -> %d\n", buf->str_exe, buf->type);
+// 		buf = buf->next;
+// 	}
+// }
 
 // static void	ft_tty_mask(void)
 // {
@@ -35,21 +35,25 @@ static	void print_str_exe(t_str_exe *str_exe)
 
 void	executable(t_minishell *m_shell, char **envp)
 {
-	int pid;
-	t_str_exe *buf;
+	int			pid;
+	t_str_exe	*buf;
 
 	pid = ft_fork();
 	buf = m_shell->str_exe;
 	if (pid == 0)
 	{
-		while(buf && buf->type != 2)
+		while(buf && buf->type != 2 && buf->type != 1)
 		{
 			if (buf->type == 3)
 				read_redirect(buf->str_exe);
+			else if (buf->type == 4)
+				write_redirect(buf->str_exe, 4);
+			else if (buf->type == 6)
+				write_redirect(buf->str_exe, 6);
 			buf = buf->next;
 		}
 		buf = m_shell->str_exe;
-		while(buf && buf->type != 2)
+		while(buf && buf->type != 2 && buf->type != 1)
 		{
 			if (buf->type < 3)
 				execute_process(buf->str_exe, envp);
@@ -79,11 +83,6 @@ int	main(int argc, char **argv, char **envp)
 		add_history(str);
 		parse_str(&m_shell, str);
 		executable(&m_shell, envp);
-		print_str_exe(m_shell.str_exe);
-		// execute_process(str, envp);
-		// printf("%s\n", ft_exist(envp, str));
-		// env(m_shell.envs);
-		my_pwd(&m_shell.envs);
 		free(str);
 		free_str_exe(m_shell.str_exe);
 		m_shell.str_exe = NULL;

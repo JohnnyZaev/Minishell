@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:26:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/15 18:13:36 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:34:50 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,17 @@ void    read_redirect(char *file_path)
 }
 
 //открывает/создает файл и перенаправляет stdout в файл
-void    write_redirect(int fd_in, char *file_path)
+void    write_redirect(char *file_path, int mode)
 {
     int fd_out;
 
-    fd_out = open(file_path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+    if (mode == 4)
+        fd_out = open(file_path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+    else if (mode == 6)
+        fd_out = open(file_path, O_CREAT | O_WRONLY | O_APPEND, 0644);
+    else
+        return ;
     ft_dup(fd_out, 1);
-    ft_dup(fd_in, 0);
 }
 
 //heredoc
@@ -61,12 +65,12 @@ void	read_heredoc_process(char *stop, int fd)
 	readed = 1;
     len = ft_strlen(stop);
     buf = (char *)malloc(len);
-	while (readed)
+	while (1)
 	{
-        write(1, "heredoc>", 9);
-		readed = read(0, &buf, 10);
-		if (!ft_strncmp(buf, stop, len))
-			exit(EXIT_SUCCESS);
+        write(1, "> ", 2);
+		readed = read(0, &buf, len);
+		if (!ft_strncmp(buf, stop, len) || readed > 0)
+			break ;
 		write(fd, &buf, readed);
 	}
     free(buf);

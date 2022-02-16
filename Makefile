@@ -6,7 +6,7 @@
 #    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/16 13:07:56 by ereginia         ###   ########.fr        #
+#    Updated: 2022/02/16 14:49:06 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,11 +54,7 @@ $(LIBFT)			:
 							make -C $(LIBFT_DIR)
 
 $(NAME)				:	$(OBJS)
-<<<<<<< HEAD
 							$(CC) $(CFLAGS)  -lreadline -L/Users/ereginia/.brew/opt/readline/lib -I/Users/ereginia/.brew/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
-=======
-							$(CC) $(CFLAGS)  -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
->>>>>>> 848dd54eccf8efa753965644960c3c57410dbea7
 
 %.o					:	%.c $(HEADER)
 							$(CC) $(CFLAGS) -c $< -o $@

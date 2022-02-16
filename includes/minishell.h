@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 13:06:33 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:40:33 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	pipe_welding(int *pipe1, int *pipe2);
 //execute_and_redirects.c
 void	execute_process(char *c_line, char **envp);
 void	read_redirect(char *file_path);
-void	write_redirect(int fd_in, char *file_path);
+void	write_redirect(char *file_path, int mode);
 void	read_heredoc_process(char *stop, int fd);
 //envp.c
 void	envp_to_dict(t_envs **envs, char **envp);
@@ -100,8 +100,6 @@ void	parse_handler(t_minishell *m_shell, char **str);
 
 // utils/ft_split_max.c
 char	**ft_split_max(char *str, char *charset, char sep);
-// utils/substr_max.c
-char	*ft_substr_max(char *str);
 
 // utils/clean.c
 void	free_split(char **tofree);
