@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 11:25:34 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 16:55:04 by gvarys           ###   ########.fr       */
+/*   Created: 2022/02/15 12:27:46 by gvarys            #+#    #+#             */
+/*   Updated: 2022/02/15 13:02:57 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//new readline if control + c was pressed
-static void	control_c_handler(int sig)
+void	unset(t_minishell *m_shell, t_str_exe *str_exe)
 {
-	(void)sig;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-//create signal for control + c
-void	start_signals(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, &control_c_handler);
+	if (!valid_chars_in_env(str_exe->str_exe))
+	{
+		printf("minishell $ unset: not a valid identifier\n");
+	}
+	else
+		remove_envs(&m_shell->envs, str_exe->str_exe);
 }

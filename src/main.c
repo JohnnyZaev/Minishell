@@ -6,11 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/02/10 15:40:36 by gvarys           ###   ########.fr       */
-=======
-/*   Updated: 2022/02/10 13:05:36 by ereginia         ###   ########.fr       */
->>>>>>> 657b8f803ce6af4eb435d53131987efcba732266
+/*   Updated: 2022/02/15 16:25:16 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +21,14 @@ static	void print_str_exe(t_str_exe *str_exe)
 	}
 }
 
-static void	ft_tty_mask(void)
-{
-	struct termios	sterm;
+// static void	ft_tty_mask(void)
+// {
+// 	struct termios	sterm;
 
-	tcgetattr(0, &sterm);
-	sterm.c_lflag &= ~ECHOCTL;
-	tcsetattr(0, 0, &sterm);
-}
+// 	tcgetattr(0, &sterm);
+// 	sterm.c_lflag &= ~ECHOCTL;
+// 	tcsetattr(0, 0, &sterm);
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -45,15 +41,18 @@ int	main(int argc, char **argv, char **envp)
 	printf("%s\n", search_envs(&m_shell.envs, argv[1]));
 	while (true)
 	{
-		ft_tty_mask();
+		// ft_tty_mask();
 		start_signals();
 		str = readline("minishell $ ");
 		if (!str)
-			exit(error(2));
+			exit(printf("\033[Aminishell $ exit\n"));
 		add_history(str);
 		parse_str(&m_shell, str);
 		print_str_exe(m_shell.str_exe);
 		// execute_process(str, envp);
+		// printf("%s\n", ft_exist(envp, str));
+		// env(m_shell.envs);
+		my_pwd(&m_shell.envs);
 		free(str);
 		free_str_exe(m_shell.str_exe);
 	}

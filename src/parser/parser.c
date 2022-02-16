@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 16:21:12 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/10 16:30:30 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	parse_str(t_minishell *m_shell, char *str)
 	char	*str_temp;
 	int		i;
 
+	if (ft_strlen(str) == 0)
+		return ;
 	str_temp = ft_strtrim(str, " \t");
 	if (!str_temp)
 		exit(error(1));

@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 16:21:00 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/15 18:11:51 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ void	read_heredoc_process(char *stop, int fd);
 //envp.c
 void	envp_to_dict(t_envs **envs, char **envp);
 char	*search_envs(t_envs **envs, char *key);
+void	remove_envs(t_envs **envs, char *key);
+bool	valid_chars_in_env(char *key);
+void	parce_envp(t_envs **envs, char *envp);
+
 //signals
 void	start_signals(void);
 
@@ -88,5 +92,14 @@ void	free_str_exe(t_str_exe *str_exe);
 
 //ft_split_max.c
 char	**ft_split_max(char *str, char *charset);
+
+//builtins
+void	unset(t_minishell *m_shell, t_str_exe *str_exe);
+void	env(t_envs *envs);
+void	my_exit(t_str_exe *str_exe);
+void	my_pwd(t_envs **envs);
+void	my_export(t_minishell *m_shell, t_str_exe *str_exe);
+void	my_cd(t_minishell *m_shell, t_str_exe *str_exe);
+void	my_echo(t_str_exe *str_exe);
 
 #endif

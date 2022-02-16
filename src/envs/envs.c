@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:53:49 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/09 12:55:29 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/15 17:24:26 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_envs	*create_envs_dict(char *envp)
 	return (new);
 }
 
-static void	parce_envp(t_envs **envs, char *envp)
+void	parce_envp(t_envs **envs, char *envp)
 {
 	t_envs	*temp;
 

@@ -6,7 +6,7 @@
 #    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/10 16:22:18 by gvarys           ###   ########.fr        #
+#    Updated: 2022/02/15 17:56:11 by gvarys           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,15 @@ SRC_FILES			=	main.c\
 						utils/execute_and_redirects.c\
 						utils/error.c\
 						utils/ft_split_max.c\
+						builtins/unset.c\
+						builtins/env.c\
+						builtins/exit.c\
+						builtins/pwd.c\
+						builtins/export.c\
+						builtins/cd.c\
+						builtins/echo.c\
 						envs/envs.c\
+						envs/envs_utils.c\
 						signals/signals.c\
 						parser/parser.c\
 
@@ -44,7 +52,7 @@ $(LIBFT)			:
 							make -C $(LIBFT_DIR)
 
 $(NAME)				:	$(OBJS)
-							$(CC) $(CFLAGS)  -lreadline -L~/.brew/opt/readline/lib -I~/.brew/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
+							$(CC) $(CFLAGS)  -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
 
 %.o					:	%.c $(HEADER)
 							$(CC) $(CFLAGS) -c $< -o $@
