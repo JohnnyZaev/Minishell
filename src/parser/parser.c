@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 13:07:03 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/16 15:34:23 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	type_searcher(char *str)
 {
-    if (!str)
-        return (0);
+	if (!str)
+		return (0);
 	if (!(ft_strncmp(str, "|", 2)))
 		return (PIPE);
 	if (!(ft_strncmp(str, ";", 2)))
@@ -86,7 +86,7 @@ void	parse_str(t_minishell *m_shell, char *str)
 	free(str_temp);
 	parse_handler(m_shell, str_split);
 	i = -1;
-	while(str_split[++i])
+	while (str_split[++i])
 	{
 		str_temp = str_split[i];
 		free(str_temp);
@@ -96,7 +96,7 @@ void	parse_str(t_minishell *m_shell, char *str)
 
 void	free_str_exe(t_str_exe *str_exe)
 {
-	t_str_exe *temp;
+	t_str_exe	*temp;
 
 	while (str_exe)
 	{

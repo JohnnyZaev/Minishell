@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:31:08 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/15 12:56:45 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 15:33:20 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void	remove_envs(t_envs **envs, char *key)
 	}
 	while (temp && temp->next)
 	{
-	if (!(ft_strncmp(temp->next->key, key, ft_strlen(key) + 1)))
-	{
-		save = temp->next->next;
-		free_one_env(temp->next);
-		temp->next = save;
-	}
-	temp = temp->next;
+		if (!(ft_strncmp(temp->next->key, key, ft_strlen(key) + 1)))
+		{
+			save = temp->next->next;
+			free_one_env(temp->next);
+			temp->next = save;
+		}
+		temp = temp->next;
 	}
 }

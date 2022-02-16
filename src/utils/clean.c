@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 12:02:39 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/13 12:05:00 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/16 15:35:23 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	free_split(char **tofree)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(tofree[i])
+	while (tofree[i])
 	{
 		free(tofree[i]);
 		i++;
