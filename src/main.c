@@ -6,13 +6,13 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 11:04:14 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 15:14:29 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	void print_str_exe(t_str_exe *str_exe)
+static void	print_str_exe(t_str_exe *str_exe)
 {
 	while (str_exe)
 	{
@@ -20,15 +20,6 @@ static	void print_str_exe(t_str_exe *str_exe)
 		str_exe = str_exe->next;
 	}
 }
-
-// static void	ft_tty_mask(void)
-// {
-// 	struct termios	sterm;
-
-// 	tcgetattr(0, &sterm);
-// 	sterm.c_lflag &= ~ECHOCTL;
-// 	tcsetattr(0, 0, &sterm);
-// }
 
 int	main(int argc, char **argv, char **envp)
 {

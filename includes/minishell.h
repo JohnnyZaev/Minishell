@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 10:18:09 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 15:13:44 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 
 typedef struct s_str_exe
 {
-	char	*str_exe;
-	int		type;
+	char				*str_exe;
+	int					type;
 	struct s_str_exe	*prev;
 	struct s_str_exe	*next;
 }	t_str_exe;
