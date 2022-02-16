@@ -6,7 +6,7 @@
 #    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/16 12:08:29 by gvarys           ###   ########.fr        #
+#    Updated: 2022/02/16 15:17:29 by gvarys           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC_FILES			=	main.c\
 						utils/execute_and_redirects.c\
 						utils/error.c\
 						utils/ft_split_max.c\
+						utils/clean.c\
 						builtins/unset.c\
 						builtins/env.c\
 						builtins/exit.c\
@@ -45,6 +46,7 @@ SRC_FILES			=	main.c\
 						envs/envs_utils.c\
 						signals/signals.c\
 						parser/parser.c\
+						parser/parser_utils.c
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))
 

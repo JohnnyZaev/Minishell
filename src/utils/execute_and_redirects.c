@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:26:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/10 11:41:23 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:13:36 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,28 @@
 void    execute_process(char *c_line, char **envp)
 {
     char	**argVec1;
+    char    *bin_name;
 
 	argVec1 = ft_split(c_line, ' ');
-	execve(ft_exist(envp, argVec1[0]), argVec1, NULL);
+    if (!access(argVec1[0], 0))
+    {
+        execve(argVec1[0], argVec1, NULL);
+        free_split(argVec1);
+        exit(EXIT_FAILURE);
+    }
+    bin_name = ft_exist(envp, argVec1[0]);
+    execve(bin_name, argVec1, NULL);
+    free(bin_name);
+    free_split(argVec1);
     exit(EXIT_SUCCESS);
 }
 
 //открывает файл и перенаправляет в stdin
-void    read_redirect(int fd_out, char *file_path)
+void    read_redirect(char *file_path)
 {
     int fd_in;
 
     fd_in = open(file_path, O_RDONLY);
-    ft_dup(fd_out, 1);
     ft_dup(fd_in, 0);
 }
 

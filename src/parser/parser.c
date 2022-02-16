@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 10:18:04 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 13:07:03 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	type_searcher(char *str)
+int	type_searcher(char *str)
 {
+    if (!str)
+        return (0);
 	if (!(ft_strncmp(str, "|", 2)))
 		return (PIPE);
 	if (!(ft_strncmp(str, ";", 2)))
@@ -29,14 +31,14 @@ static int	type_searcher(char *str)
 	return (0);
 }
 
-static t_str_exe	*create_str_exe(char *content)
+t_str_exe	*create_str_exe(char *content)
 {
 	t_str_exe	*new;
 
 	new = (t_str_exe *)ft_calloc(1, sizeof(t_str_exe));
 	if (!new)
 		return (new);
-	new->str_exe = strdup(content);
+	new->str_exe = ft_strdup(content);
 	if (!new->str_exe)
 	{
 		free(new);
@@ -46,7 +48,7 @@ static t_str_exe	*create_str_exe(char *content)
 	return (new);
 }
 
-static void	str_exe_addback(t_str_exe **str_exe, t_str_exe *new)
+void	str_exe_addback(t_str_exe **str_exe, t_str_exe *new)
 {
 	t_str_exe	*temp;
 	t_str_exe	*save;
@@ -65,33 +67,6 @@ static void	str_exe_addback(t_str_exe **str_exe, t_str_exe *new)
 	}
 }
 
-static void	parse_handler(t_minishell *m_shell, char **str)
-{
-	t_str_exe	*temp;
-	int			i;
-
-	temp = NULL;
-	i = -1;
-	while (str[++i])
-	{
-		if (type_searcher(str[i]))
-		{
-			if (temp)
-				temp->type = type_searcher(str[i]);
-			else
-				exit(EXIT_FAILURE);
-			continue ;
-		}
-		temp = create_str_exe(str[i]);
-		if (temp == NULL)
-			exit(error(1));
-		if (i == 0)
-			m_shell->str_exe = temp;
-		else
-			str_exe_addback(&m_shell->str_exe, temp);
-	}
-}
-
 void	parse_str(t_minishell *m_shell, char *str)
 {
 	char	**str_split;
@@ -102,12 +77,12 @@ void	parse_str(t_minishell *m_shell, char *str)
 		return ;
 	str_temp = ft_strtrim(str, " \t");
 	if (!str_temp)
-		exit(error(1));
+		exit(1);
 	if (ft_strlen(str_temp) == 0)
 		return ;
-	str_split = ft_split_max(str, "><|;");
+	str_split = ft_split_max(str, "><|;", ' ');
 	if (!str_split)
-		exit(error(1));
+		exit(1);
 	free(str_temp);
 	parse_handler(m_shell, str_split);
 	i = -1;
