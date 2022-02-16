@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:59:10 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 10:44:08 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 15:25:18 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	my_echo(t_str_exe *str_exe)
 {
 	bool	flag;
-	
+
 	flag = true;
 	if (str_exe && str_exe->str_exe && ft_strncmp(str_exe->str_exe, "-n", 3))
 		flag = false;

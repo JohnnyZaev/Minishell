@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:30:05 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 10:51:12 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 15:24:55 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	update_pwds(t_minishell *m_shell, char *old_pwd, char *new_pwd)
 {
-	char *old_str;
-	char *new_str;
+	char	*old_str;
+	char	*new_str;
 
 	remove_envs(&m_shell->envs, "PWD");
 	remove_envs(&m_shell->envs, "OLDPWD");
@@ -31,7 +31,7 @@ static void	update_pwds(t_minishell *m_shell, char *old_pwd, char *new_pwd)
 
 static bool	home_cd(t_minishell *m_shell)
 {
-	char *home;
+	char	*home;
 
 	home = search_envs(&m_shell->envs, "HOME");
 	if (!home)
@@ -52,9 +52,9 @@ static bool	home_cd(t_minishell *m_shell)
 
 void	my_cd(t_minishell *m_shell, t_str_exe *str_exe)
 {
-	char old_pwd[PATH_MAX + 1];
-	char new_pwd[PATH_MAX + 1];
-	char *norm_status;
+	char	old_pwd[PATH_MAX + 1];
+	char	new_pwd[PATH_MAX + 1];
+	char	*norm_status;
 
 	norm_status = getcwd(old_pwd, PATH_MAX + 1);
 	if (!norm_status)

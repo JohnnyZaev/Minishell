@@ -6,7 +6,7 @@
 #    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/16 14:49:06 by ereginia         ###   ########.fr        #
+#    Updated: 2022/02/16 16:46:31 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ HEADER_DIR			=	includes/
 
 LIBFT_DIR			=	libft/
 LIBFT				=	$(LIBFT_DIR)/libft.a
+
+READLINE_FLAGS		= -L/Users/gvarys/.brew/opt/readline/lib -I/Users/gvarys/.brew/opt/readline/include
 
 HEADER				=	$(HEADER_DIR)minishell.h
 

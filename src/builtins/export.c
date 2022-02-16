@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:01:17 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 10:48:12 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 15:26:27 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	check_key(t_envs **envs, t_str_exe *str_exe)
 	char	*key;
 
 	i = 0;
-	while(str_exe->str_exe[i] != '=')
+	while (str_exe->str_exe[i] != '=')
 		i++;
 	key = ft_substr(str_exe->str_exe, 0, i);
 	if (!key)
@@ -37,7 +37,7 @@ static void	empty_handler(t_envs *envs)
 	}
 }
 
-void my_export(t_minishell *m_shell, t_str_exe *str_exe)
+void	my_export(t_minishell *m_shell, t_str_exe *str_exe)
 {
 	if (!str_exe || str_exe->type)
 		empty_handler(m_shell->envs);

@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 16:36:58 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:45:07 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,6 @@
 // 		printf("STR -> %s, TYPE -> %d\n", buf->str_exe, buf->type);
 // 		buf = buf->next;
 // 	}
-// }
-
-// static void	ft_tty_mask(void)
-// {
-// 	struct termios	sterm;
-
-// 	tcgetattr(0, &sterm);
-// 	sterm.c_lflag &= ~ECHOCTL;
-// 	tcsetattr(0, 0, &sterm);
 // }
 
 void	executable(t_minishell *m_shell, char **envp)
@@ -75,7 +66,6 @@ int	main(int argc, char **argv, char **envp)
 	printf("%s\n", search_envs(&m_shell.envs, argv[1]));
 	while (true)
 	{
-		// ft_tty_mask();
 		start_signals();
 		str = readline("minishell $ ");
 		if (!str)

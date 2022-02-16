@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 16:40:33 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:45:39 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 
 typedef struct s_str_exe
 {
-	char	*str_exe;
-	int		type;
+	char				*str_exe;
+	int					type;
 	struct s_str_exe	*prev;
 	struct s_str_exe	*next;
 }	t_str_exe;
@@ -60,34 +60,34 @@ typedef struct s_minishell
 }	t_minishell;
 
 //minishell_utils.c
-char	*ft_exist(char **envp, char *cmd);
-int		ft_dup(int old, int newfd);
-int		ft_fork(void);
+char		*ft_exist(char **envp, char *cmd);
+int			ft_dup(int old, int newfd);
+int			ft_fork(void);
 //pipes_and_pids.c
-int		**ft_piping(int count);
-int		*ft_piding(int count);
-void	ft_pipe(int *fd);
-void	pipe_welding(int *pipe1, int *pipe2);
+int			**ft_piping(int count);
+int			*ft_piding(int count);
+void		ft_pipe(int *fd);
+void		pipe_welding(int *pipe1, int *pipe2);
 //execute_and_redirects.c
 void	execute_process(char *c_line, char **envp);
 void	read_redirect(char *file_path);
 void	write_redirect(char *file_path, int mode);
 void	read_heredoc_process(char *stop, int fd);
 //envp.c
-void	envp_to_dict(t_envs **envs, char **envp);
-char	*search_envs(t_envs **envs, char *key);
-void	remove_envs(t_envs **envs, char *key);
-bool	valid_chars_in_env(char *key);
-void	parce_envp(t_envs **envs, char *envp);
+void		envp_to_dict(t_envs **envs, char **envp);
+char		*search_envs(t_envs **envs, char *key);
+void		remove_envs(t_envs **envs, char *key);
+bool		valid_chars_in_env(char *key);
+void		parce_envp(t_envs **envs, char *envp);
 
 //signals
-void	start_signals(void);
+void		start_signals(void);
 
 //readline prototypes
-void	rl_replace_line(const char *text, int clear_undo);
+void		rl_replace_line(const char *text, int clear_undo);
 
 //errors
-int		error(int err);
+int			error(int err);
 
 // parser/parser.c
 int			type_searcher(char *str);
@@ -96,21 +96,21 @@ void		str_exe_addback(t_str_exe **str_exe, t_str_exe *new);
 void		free_str_exe(t_str_exe *str_exe);
 t_str_exe	*create_str_exe(char *content);
 // parser/parser_utils.c
-void	parse_handler(t_minishell *m_shell, char **str);
+void		parse_handler(t_minishell *m_shell, char **str);
 
 // utils/ft_split_max.c
 char	**ft_split_max(char *str, char *charset, char sep);
 
 // utils/clean.c
-void	free_split(char **tofree);
+void		free_split(char **tofree);
 
 //builtins
-void	unset(t_minishell *m_shell, t_str_exe *str_exe);
-void	env(t_envs *envs);
-void	my_exit(t_str_exe *str_exe);
-void	my_pwd(t_envs **envs);
-void	my_export(t_minishell *m_shell, t_str_exe *str_exe);
-void	my_cd(t_minishell *m_shell, t_str_exe *str_exe);
-void	my_echo(t_str_exe *str_exe);
+void		unset(t_minishell *m_shell, t_str_exe *str_exe);
+void		env(t_envs *envs);
+void		my_exit(t_str_exe *str_exe);
+void		my_pwd(t_envs **envs);
+void		my_export(t_minishell *m_shell, t_str_exe *str_exe);
+void		my_cd(t_minishell *m_shell, t_str_exe *str_exe);
+void		my_echo(t_str_exe *str_exe);
 
 #endif
