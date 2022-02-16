@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:30:05 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/15 17:54:47 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 10:51:12 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	update_pwds(t_minishell *m_shell, char *old_pwd, char *new_pwd)
 	free(new_str);
 }
 
-static bool	home_cd(t_minishell *m_shell, t_str_exe *str_exe)
+static bool	home_cd(t_minishell *m_shell)
 {
 	char *home;
 
@@ -52,8 +52,8 @@ static bool	home_cd(t_minishell *m_shell, t_str_exe *str_exe)
 
 void	my_cd(t_minishell *m_shell, t_str_exe *str_exe)
 {
-	char *old_pwd[PATH_MAX + 1];
-	char *new_pwd[PATH_MAX + 1];
+	char old_pwd[PATH_MAX + 1];
+	char new_pwd[PATH_MAX + 1];
 	char *norm_status;
 
 	norm_status = getcwd(old_pwd, PATH_MAX + 1);
@@ -61,7 +61,7 @@ void	my_cd(t_minishell *m_shell, t_str_exe *str_exe)
 		exit(error(3));
 	if (!str_exe)
 	{
-		if (!home_cd(m_shell, str_exe))
+		if (!home_cd(m_shell))
 			return ;
 	}
 	else
@@ -69,7 +69,7 @@ void	my_cd(t_minishell *m_shell, t_str_exe *str_exe)
 		if (chdir(str_exe->str_exe) == -1)
 		{
 			printf("minishell $ cd: No such file or directory\n");
-			return (false);
+			return ;
 		}
 	}
 	norm_status = getcwd(new_pwd, PATH_MAX + 1);
