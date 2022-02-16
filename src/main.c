@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 13:02:42 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/16 13:07:48 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static	void print_str_exe(t_str_exe *str_exe)
 	}
 }
 
-static void	ft_tty_mask(void)
-{
-	struct termios	sterm;
+// static void	ft_tty_mask(void)
+// {
+// 	struct termios	sterm;
 
-	tcgetattr(0, &sterm);
-	sterm.c_lflag &= ~ECHOCTL;
-	tcsetattr(0, 0, &sterm);
-}
+// 	tcgetattr(0, &sterm);
+// 	sterm.c_lflag &= ~ECHOCTL;
+// 	tcsetattr(0, 0, &sterm);
+// }
 
 void	executable(t_minishell *m_shell, char **envp)
 {
@@ -71,19 +71,19 @@ int	main(int argc, char **argv, char **envp)
 	printf("%s\n", search_envs(&m_shell.envs, argv[1]));
 	while (true)
 	{
-		ft_tty_mask();
+		// ft_tty_mask();
 		start_signals();
 		str = readline("minishell $ ");
 		if (!str)
-			exit(error(2));
+			exit(printf("\033[Aminishell $ exit\n"));
 		add_history(str);
 		parse_str(&m_shell, str);
 		executable(&m_shell, envp);
 		print_str_exe(m_shell.str_exe);
-		// printf("file - |%s|, comand - |%s|\n", m_shell.str_exe->str_exe, m_shell.str_exe->next->str_exe);
-		// read_redirect(m_shell.str_exe->str_exe);
-		// read_redirect(m_shell.str_exe->next->str_exe);
-		// execute_process(m_shell.str_exe->next->next->str_exe, envp);
+		// execute_process(str, envp);
+		// printf("%s\n", ft_exist(envp, str));
+		// env(m_shell.envs);
+		my_pwd(&m_shell.envs);
 		free(str);
 		free_str_exe(m_shell.str_exe);
 		m_shell.str_exe = NULL;

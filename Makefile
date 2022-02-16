@@ -6,7 +6,7 @@
 #    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/15 12:48:21 by ereginia         ###   ########.fr        #
+#    Updated: 2022/02/16 13:07:56 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,15 @@ SRC_FILES			=	main.c\
 						utils/error.c\
 						utils/ft_split_max.c\
 						utils/clean.c\
+						builtins/unset.c\
+						builtins/env.c\
+						builtins/exit.c\
+						builtins/pwd.c\
+						builtins/export.c\
+						builtins/cd.c\
+						builtins/echo.c\
 						envs/envs.c\
+						envs/envs_utils.c\
 						signals/signals.c\
 						parser/parser.c\
 						parser/parser_utils.c
@@ -46,7 +54,11 @@ $(LIBFT)			:
 							make -C $(LIBFT_DIR)
 
 $(NAME)				:	$(OBJS)
+<<<<<<< HEAD
 							$(CC) $(CFLAGS)  -lreadline -L/Users/ereginia/.brew/opt/readline/lib -I/Users/ereginia/.brew/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
+=======
+							$(CC) $(CFLAGS)  -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
+>>>>>>> 848dd54eccf8efa753965644960c3c57410dbea7
 
 %.o					:	%.c $(HEADER)
 							$(CC) $(CFLAGS) -c $< -o $@

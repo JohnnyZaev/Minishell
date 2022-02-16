@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 12:49:06 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/16 13:07:03 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	parse_str(t_minishell *m_shell, char *str)
 	char	*str_temp;
 	int		i;
 
+	if (ft_strlen(str) == 0)
+		return ;
 	str_temp = ft_strtrim(str, " \t");
 	if (!str_temp)
 		exit(1);

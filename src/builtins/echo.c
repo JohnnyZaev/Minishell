@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 11:25:34 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/10 16:55:04 by gvarys           ###   ########.fr       */
+/*   Created: 2022/02/15 17:59:10 by gvarys            #+#    #+#             */
+/*   Updated: 2022/02/16 10:44:08 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//new readline if control + c was pressed
-static void	control_c_handler(int sig)
+void	my_echo(t_str_exe *str_exe)
 {
-	(void)sig;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-//create signal for control + c
-void	start_signals(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, &control_c_handler);
+	bool	flag;
+	
+	flag = true;
+	if (str_exe && str_exe->str_exe && ft_strncmp(str_exe->str_exe, "-n", 3))
+		flag = false;
+	while (str_exe && !str_exe->type)
+	{
+		printf("%s", str_exe->str_exe);
+		if (str_exe->next && !str_exe->next->type)
+			printf(" ");
+		str_exe = str_exe->next;
+	}
+	if (flag)
+		printf("\n");
 }
