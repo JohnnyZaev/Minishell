@@ -6,13 +6,17 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:53:52 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 10:46:42 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 16:07:23 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	my_pwd(t_envs **envs)
+void	my_pwd(void)
 {
-	printf("%s\n", search_envs(envs, "PWD"));
+	char	pwd[PATH_MAX + 1];
+
+	if (!getcwd(pwd, PATH_MAX + 1))
+		exit(error(3));
+	printf("%s\n", pwd);
 }

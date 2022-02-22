@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/22 15:16:40 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:27:58 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int			which_pipe(t_str_exe *str_exec);
 void		unset(t_minishell *m_shell, t_str_exe *str_exe);
 void		env(t_envs *envs);
 void		my_exit(t_str_exe *str_exe);
-void		my_pwd(t_envs **envs);
+void		my_pwd(void);
 void		my_export(t_minishell *m_shell, t_str_exe *str_exe);
 void		my_cd(t_minishell *m_shell, t_str_exe *str_exe);
 void		my_echo(t_str_exe *str_exe);
