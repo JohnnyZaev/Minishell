@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:38:24 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/13 12:18:06 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:21:00 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //проверяет существует ли такой бинарник
 //если существует то возвращает строку = полный путь
 //если не существует то возвращает NULL
-char	*ft_exist(char **envp, char *cmd)
+char	*ft_exist(char *env, char *cmd)
 {
 	char	**path;
 	char	*buf;
@@ -23,9 +23,7 @@ char	*ft_exist(char **envp, char *cmd)
 	int		i;
 
 	i = 0;
-	while (ft_strncmp(envp[i], "PATH", 4) && envp[i] != NULL)
-		i++;
-	path = ft_split(envp[i] + 5, ':');
+	path = ft_split(env, ':');
 	i = 0;
 	while (path[i] != NULL)
 	{
