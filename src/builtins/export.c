@@ -6,21 +6,21 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:01:17 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 15:26:27 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/22 15:26:04 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	check_key(t_envs **envs, t_str_exe *str_exe)
+static void	check_key(t_envs **envs, char *str_exe)
 {
 	int		i;
 	char	*key;
 
 	i = 0;
-	while (str_exe->str_exe[i] != '=')
+	while (str_exe[i] != '=')
 		i++;
-	key = ft_substr(str_exe->str_exe, 0, i);
+	key = ft_substr(str_exe, 0, i);
 	if (!key)
 		exit(error(1));
 	if (search_envs(envs, key))
@@ -37,17 +37,17 @@ static void	empty_handler(t_envs *envs)
 	}
 }
 
-void	my_export(t_minishell *m_shell, t_str_exe *str_exe)
+void	my_export(t_minishell *m_shell, char *str_exe)
 {
-	if (!str_exe || str_exe->type)
+	if (!str_exe)
 		empty_handler(m_shell->envs);
-	else if (!valid_chars_in_env(str_exe->str_exe))
+	else if (!valid_chars_in_env(str_exe))
 	{
 		printf("minishell $ unset: not a valid identifier\n");
 	}
 	else
 	{
 		check_key(&m_shell->envs, str_exe);
-		parce_envp(&m_shell->envs, str_exe->str_exe);
+		parce_envp(&m_shell->envs, str_exe);
 	}
 }

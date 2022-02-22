@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:09:59 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/22 12:09:15 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:01:35 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	executable(t_str_exe *str_exec, char **envp, t_pipes *pipex, int i)
 		buf = str_exec;
 		while(buf)
 		{
-			if (buf->type < 3)
+			if (buf->type < 3 && !(builtints_handler(m_shell, buf->str_exe)))
 				execute_process(buf->str_exe, envp);
 			buf = buf->next;
 		}

@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/02/16 16:08:33 by gvarys           ###   ########.fr       */
-=======
-/*   Updated: 2022/02/22 12:07:30 by ereginia         ###   ########.fr       */
->>>>>>> 5cf4dd0bab51e755ee57d05e80b53f534c48cf9d
+/*   Updated: 2022/02/22 14:03:41 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 static	void print_str_exe(t_str_exe *str_exe)
 {
