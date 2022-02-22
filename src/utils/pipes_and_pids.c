@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_and_pids.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:00:45 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/16 15:15:11 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/21 12:06:17 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,29 @@ int	*ft_piding(int count)
 	return (p_pids);
 }
 
-//перенаправляем вывод одной трубы на вывод другой трубы
-void	pipe_welding(int *pipe1, int *pipe2)
+//закрываем неиспользуемые дескрипторы
+void	close_unusedpipes(int **pipes, int pipe_num1, int pipe_num2, int count)
 {
-	close(pipe1[1]);
-	ft_dup(pipe1[0], 0);
-	close(pipe1[0]);
-	close(pipe2[0]);
-	ft_dup(pipe2[1], 1);
-	close(pipe2[1]);
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		if ((i != pipe_num1) && (i != pipe_num2))
+		{
+			close(pipes[i][0]);
+			close(pipes[i][1]);
+		}
+		i++;
+	}
+}
+
+//ждем смерти всех дочерних процессов
+void	wait_all_pids(int pids_count)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < pids_count)
+		wait(NULL);
 }

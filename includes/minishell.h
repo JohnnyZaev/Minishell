@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 16:08:20 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/22 13:54:33 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@
 # define HEREDOC 5
 # define REDIRECT_AP 6
 
+typedef struct s_pipes
+{
+	int	**pipes;
+	int *pids;
+	int	pipe_count;
+	int	pid_count;
+}	t_pipes;
+
 typedef struct s_str_exe
 {
 	char				*str_exe;
@@ -63,16 +71,18 @@ typedef struct s_minishell
 char		*ft_exist(char **envp, char *cmd);
 int			ft_dup(int old, int newfd);
 int			ft_fork(void);
+void		ft_pipe(int *fd);
 //pipes_and_pids.c
 int			**ft_piping(int count);
 int			*ft_piding(int count);
-void		ft_pipe(int *fd);
-void		pipe_welding(int *pipe1, int *pipe2);
+void		close_unusedpipes(int **pipes, int pipe_num1, int pipe_num2, int count);
+void		wait_all_pids(int pids_count);
+
 //execute_and_redirects.c
-void		execute_process(char *c_line, char **envp);
-void		read_redirect(char *file_path);
-void		write_redirect(int fd_in, char *file_path);
-void		read_heredoc_process(char *stop, int fd);
+void	execute_process(char *c_line, char **envp);
+void	read_redirect(char *file_path);
+void	write_redirect(char *file_path, int mode);
+void	read_heredoc_process(char *stop, int fd);
 //envp.c
 void		envp_to_dict(t_envs **envs, char **envp);
 char		*search_envs(t_envs **envs, char *key);
@@ -99,12 +109,18 @@ t_str_exe	*create_str_exe(char *content);
 void		parse_handler(t_minishell *m_shell, char **str);
 
 // utils/ft_split_max.c
-char		**ft_split_max(char *str, char *charset, char sep);
-// utils/substr_max.c
-char		*ft_substr_max(char *str);
+char	**ft_split_max(char *str, char *charset, char sep);
 
 // utils/clean.c
 void		free_split(char **tofree);
+
+// executable/exe.c
+void		executable(t_str_exe *str_exec, char **envp, t_pipes *pipex, int i);
+t_str_exe   *get_next_pipe(t_str_exe *str_exec);
+int			pipe_type(t_str_exe *str_exec);
+int			pipes_counter(t_minishell	*m_shell);
+int			pids_counter(t_minishell	*m_shell);
+int			which_pipe(t_str_exe *str_exec);
 
 //builtins
 void		unset(t_minishell *m_shell, t_str_exe *str_exe);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/16 15:17:29 by gvarys           ###   ########.fr        #
+#    Updated: 2022/02/17 12:11:34 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC_FILES			=	main.c\
 						builtins/echo.c\
 						envs/envs.c\
 						envs/envs_utils.c\
+						executable/exe.c\
 						signals/signals.c\
 						parser/parser.c\
 						parser/parser_utils.c
@@ -56,7 +57,7 @@ $(LIBFT)			:
 							make -C $(LIBFT_DIR)
 
 $(NAME)				:	$(OBJS)
-							$(CC) $(CFLAGS)  -lreadline $(READLINE_FLAGS) -L$(LIBFT_DIR) -lft $(OBJS) -o $@
+							$(CC) $(CFLAGS)  -lreadline -L/Users/ereginia/.brew/opt/readline/lib -I/Users/ereginia/.brew/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
 
 %.o					:	%.c $(HEADER)
 							$(CC) $(CFLAGS) -c $< -o $@
