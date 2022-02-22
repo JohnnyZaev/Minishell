@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/21 14:47:19 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:16:40 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_minishell
 }	t_minishell;
 
 //minishell_utils.c
-char		*ft_exist(char **envp, char *cmd);
+char		*ft_exist(char *env, char *cmd);
 int			ft_dup(int old, int newfd);
 int			ft_fork(void);
 void		ft_pipe(int *fd);
@@ -79,7 +79,7 @@ void		close_unusedpipes(int **pipes, int pipe_num1, int pipe_num2, int count);
 void		wait_all_pids(int pids_count);
 
 //execute_and_redirects.c
-void	execute_process(char *c_line, char **envp);
+void	execute_process(char *c_line, t_envs *envs);
 void	read_redirect(char *file_path);
 void	write_redirect(char *file_path, int mode);
 void	read_heredoc_process(char *stop, int fd);
@@ -115,7 +115,7 @@ char	**ft_split_max(char *str, char *charset, char sep);
 void		free_split(char **tofree);
 
 // executable/exe.c
-void		executable(t_str_exe *str_exec, char **envp, t_pipes *pipex, int i);
+void		executable(t_minishell	*m_shell, t_str_exe *str_exec, t_pipes *pipex, int i);
 t_str_exe   *get_next_pipe(t_str_exe *str_exec);
 int			pipe_type(t_str_exe *str_exec);
 int			pipes_counter(t_minishell	*m_shell);
