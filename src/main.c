@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 15:23:14 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 16:08:33 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ int	main(int argc, char **argv, char **envp)
 			exit(printf("\033[Aminishell $ exit\n"));
 		add_history(str);
 		parse_str(&m_shell, str);
-		executable(&m_shell, envp);
+		print_str_exe(m_shell.str_exe);
+		// executable(&m_shell, envp);
+		my_pwd();
 		free(str);
 		free_str_exe(m_shell.str_exe);
 		m_shell.str_exe = NULL;

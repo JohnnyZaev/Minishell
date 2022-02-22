@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 15:20:21 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/16 16:08:20 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void		free_split(char **tofree);
 void		unset(t_minishell *m_shell, t_str_exe *str_exe);
 void		env(t_envs *envs);
 void		my_exit(t_str_exe *str_exe);
-void		my_pwd(t_envs **envs);
+void		my_pwd(void);
 void		my_export(t_minishell *m_shell, t_str_exe *str_exe);
 void		my_cd(t_minishell *m_shell, t_str_exe *str_exe);
 void		my_echo(t_str_exe *str_exe);
