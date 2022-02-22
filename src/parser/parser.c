@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 15:34:23 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/22 11:51:17 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ t_str_exe	*create_str_exe(char *content)
 	if (!new)
 		return (new);
 	new->str_exe = ft_strdup(content);
-	if (!new->str_exe)
-	{
-		free(new);
-		new = NULL;
-		return (new);
-	}
 	return (new);
 }
 
@@ -85,11 +79,11 @@ void	parse_str(t_minishell *m_shell, char *str)
 		exit(1);
 	free(str_temp);
 	parse_handler(m_shell, str_split);
-	i = -1;
-	while (str_split[++i])
+	i = 0;
+	while (str_split[i])
 	{
-		str_temp = str_split[i];
-		free(str_temp);
+		free(str_split[i]);
+		i++;
 	}
 	free(str_split);
 }

@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 16:45:39 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/21 14:47:19 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@
 # define HEREDOC 5
 # define REDIRECT_AP 6
 
+typedef struct s_pipes
+{
+	int	**pipes;
+	int *pids;
+	int	pipe_count;
+	int	pid_count;
+}	t_pipes;
+
 typedef struct s_str_exe
 {
 	char				*str_exe;
@@ -63,11 +71,13 @@ typedef struct s_minishell
 char		*ft_exist(char **envp, char *cmd);
 int			ft_dup(int old, int newfd);
 int			ft_fork(void);
+void		ft_pipe(int *fd);
 //pipes_and_pids.c
 int			**ft_piping(int count);
 int			*ft_piding(int count);
-void		ft_pipe(int *fd);
-void		pipe_welding(int *pipe1, int *pipe2);
+void		close_unusedpipes(int **pipes, int pipe_num1, int pipe_num2, int count);
+void		wait_all_pids(int pids_count);
+
 //execute_and_redirects.c
 void	execute_process(char *c_line, char **envp);
 void	read_redirect(char *file_path);
@@ -103,6 +113,14 @@ char	**ft_split_max(char *str, char *charset, char sep);
 
 // utils/clean.c
 void		free_split(char **tofree);
+
+// executable/exe.c
+void		executable(t_str_exe *str_exec, char **envp, t_pipes *pipex, int i);
+t_str_exe   *get_next_pipe(t_str_exe *str_exec);
+int			pipe_type(t_str_exe *str_exec);
+int			pipes_counter(t_minishell	*m_shell);
+int			pids_counter(t_minishell	*m_shell);
+int			which_pipe(t_str_exe *str_exec);
 
 //builtins
 void		unset(t_minishell *m_shell, t_str_exe *str_exe);

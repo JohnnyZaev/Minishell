@@ -6,53 +6,49 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 16:45:07 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/22 12:07:30 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// static	void print_str_exe(t_str_exe *str_exe)
-// {
-// 	t_str_exe *buf;
-
-// 	buf = str_exe;
-// 	while (buf)
-// 	{
-// 		printf("STR -> %s, TYPE -> %d\n", buf->str_exe, buf->type);
-// 		buf = buf->next;
-// 	}
-// }
-
-void	executable(t_minishell *m_shell, char **envp)
+static	void print_str_exe(t_str_exe *str_exe)
 {
-	int			pid;
-	t_str_exe	*buf;
+	t_str_exe *buf;
 
-	pid = ft_fork();
-	buf = m_shell->str_exe;
-	if (pid == 0)
+	buf = str_exe;
+	while (buf)
 	{
-		while(buf && buf->type != 2 && buf->type != 1)
-		{
-			if (buf->type == 3)
-				read_redirect(buf->str_exe);
-			else if (buf->type == 4)
-				write_redirect(buf->str_exe, 4);
-			else if (buf->type == 6)
-				write_redirect(buf->str_exe, 6);
-			buf = buf->next;
-		}
-		buf = m_shell->str_exe;
-		while(buf && buf->type != 2 && buf->type != 1)
-		{
-			if (buf->type < 3)
-				execute_process(buf->str_exe, envp);
-			buf = buf->next;
-		}
-		exit(1);
+		printf("STR -> %s, TYPE -> %d\n", buf->str_exe, buf->type);
+		buf = buf->next;
 	}
-	waitpid(pid, NULL, 0);
+}
+
+void	exe_handler(t_minishell	*m_shell, char *str, char **envp)
+{
+	t_str_exe	*buf;
+	t_pipes		pipex;
+	int         i;
+
+	(void)envp;
+    parse_str(m_shell, str);
+	print_str_exe(m_shell->str_exe);
+	pipex.pid_count = pids_counter(m_shell);
+	pipex.pipe_count = pipes_counter(m_shell);
+	pipex.pipes = ft_piping(pipex.pipe_count);
+	pipex.pids = ft_piding(pipex.pid_count);
+	buf = m_shell->str_exe;
+	i = 0;
+	while (i < pipex.pid_count && buf)
+	{
+		executable(buf, envp, &pipex, i);
+		buf = get_next_pipe(buf);
+		i++;
+	}
+	i = -1;
+	close_unusedpipes(pipex.pipes, -1, -1, pipex.pipe_count);
+	while (++i < pipex.pid_count)
+		waitpid(pipex.pids[i], NULL, 0);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -61,9 +57,9 @@ int	main(int argc, char **argv, char **envp)
 	t_minishell	m_shell;
 
 	(void) argc;
+	(void) argv;
 	ft_memset(&m_shell, 0, sizeof(m_shell));
 	envp_to_dict(&m_shell.envs, envp);
-	printf("%s\n", search_envs(&m_shell.envs, argv[1]));
 	while (true)
 	{
 		start_signals();
@@ -71,11 +67,39 @@ int	main(int argc, char **argv, char **envp)
 		if (!str)
 			exit(printf("\033[Aminishell $ exit\n"));
 		add_history(str);
-		parse_str(&m_shell, str);
-		executable(&m_shell, envp);
+		exe_handler(&m_shell, str, envp);
 		free(str);
 		free_str_exe(m_shell.str_exe);
 		m_shell.str_exe = NULL;
 	}
 	return (0);
 }
+
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_minishell	m_shell;
+// 	t_str_exe	*buf;
+// 	int		    **pipes;
+// 	int		    *pids;
+// 	int         i = 0;
+
+// 	(void)argc;
+//     memset(&m_shell, 0, sizeof(m_shell));
+//     parse_str(&m_shell, argv[1]);
+// 	print_str_exe(m_shell.str_exe);
+// 	pipes = ft_piping(pipes_counter(&m_shell));
+// 	pids = ft_piding(pids_counter(&m_shell));
+// 	buf = m_shell.str_exe;
+// 	while (i < pids_counter(&m_shell))
+// 	{
+// 	    // printf("pipe exist %d\n", pipe_type(buf));
+// 	    executable(buf, envp, &pids[i], pipes);
+// 	    buf = get_next_pipe(buf);
+// 	    i++;
+// 	}
+// 	i = -1;
+// 	close_unusedpipes(pipes, -1, -1, pipes_counter(&m_shell));
+// 	while (++i < pids_counter(&m_shell))
+// 	    waitpid(pids[i], NULL, 0);
+//     return (0);
+// }
