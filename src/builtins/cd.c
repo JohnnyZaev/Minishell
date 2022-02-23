@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:30:05 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/22 16:00:56 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/22 16:42:53 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,17 @@ void	my_cd(t_minishell *m_shell, char *str_exe)
 	norm_status = getcwd(old_pwd, PATH_MAX + 1);
 	if (!norm_status)
 		exit(error(3));
-	if (!str_exe)
+	if (!(*str_exe))
 	{
 		if (!home_cd(m_shell))
-			exit(1);
+			return ;
 	}
 	else
 	{
 		if (chdir(str_exe) == -1)
 		{
 			printf("minishell $ cd: No such file or directory\n");
-			exit(1);
+			return ;
 		}
 	}
 	norm_status = getcwd(new_pwd, PATH_MAX + 1);

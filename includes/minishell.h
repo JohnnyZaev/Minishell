@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/22 16:03:13 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/22 16:04:19 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int			pids_counter(t_minishell	*m_shell);
 int			which_pipe(t_str_exe *str_exec);
 
 //builtins
+int			builtints_handler(t_minishell *m_shell, char *str);
 void		unset(t_minishell *m_shell, char *str_exe);
 void		env(t_envs *envs);
 void		my_exit(char *str_exe);

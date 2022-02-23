@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:09:59 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/22 16:03:14 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/22 16:51:30 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	executable(t_minishell	*m_shell, t_str_exe *str_exec, t_pipes *pipex, int i
 
 	pipe_id = which_pipe(str_exec);
 	buf = str_exec;
+	if (builtints_handler(m_shell, buf->str_exe))
+		return ;
 	pipex->pids[i] = ft_fork();
 	if (pipex->pids[i] == 0)
 	{
@@ -125,7 +127,7 @@ void	executable(t_minishell	*m_shell, t_str_exe *str_exec, t_pipes *pipex, int i
 		buf = str_exec;
 		while(buf)
 		{
-			if (buf->type < 3 && !(builtints_handler(m_shell, buf->str_exe)))
+			if (buf->type < 3)
 				execute_process(buf->str_exe, m_shell->envs);
 			buf = buf->next;
 		}

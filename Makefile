@@ -6,7 +6,7 @@
 #    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/22 14:05:28 by gvarys           ###   ########.fr        #
+#    Updated: 2022/02/22 16:04:45 by gvarys           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_FILES			=	main.c\
 						utils/error.c\
 						utils/ft_split_max.c\
 						utils/clean.c\
+						builtins/utils.c\
 						builtins/unset.c\
 						builtins/env.c\
 						builtins/exit.c\

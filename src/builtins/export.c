@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:01:17 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/22 15:26:04 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/22 17:59:11 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ static void	empty_handler(t_envs *envs)
 
 void	my_export(t_minishell *m_shell, char *str_exe)
 {
-	if (!str_exe)
+	if (!(*str_exe))
 		empty_handler(m_shell->envs);
-	else if (!valid_chars_in_env(str_exe))
+	else if (!valid_chars_in_env(str_exe + 1))
 	{
 		printf("minishell $ unset: not a valid identifier\n");
 	}
 	else
 	{
-		check_key(&m_shell->envs, str_exe);
-		parce_envp(&m_shell->envs, str_exe);
+		check_key(&m_shell->envs, str_exe + 1);
+		parce_envp(&m_shell->envs, str_exe + 1);
 	}
 }
