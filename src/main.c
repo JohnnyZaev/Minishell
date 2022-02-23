@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 15:49:32 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:32:42 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	exe_handler(t_minishell	*m_shell, char *str, char **envp)
 
 	(void)envp;
     parse_str(m_shell, str);
+	ft_memset(&pipex, 0, sizeof(pipex));
 	// print_str_exe(m_shell->str_exe);
 	pipex.pid_count = pids_counter(m_shell);
 	pipex.pipe_count = pipes_counter(m_shell);
@@ -48,6 +49,20 @@ void	exe_handler(t_minishell	*m_shell, char *str, char **envp)
 	i = -1;
 	while (++i < pipex.pid_count)
 		waitpid(pipex.pids[i], NULL, 0);
+	i = 0;
+	while (i < pipex.pipe_count + 1 && pipex.pipe_count)
+	{
+		free(pipex.pipes[i]);
+		pipex.pipes[i] = NULL;
+		i++;
+	}
+	if (pipex.pipe_count)
+	{
+		free(pipex.pipes);
+		pipex.pipes = NULL;
+	}
+	free(pipex.pids);
+	pipex.pids = NULL;
 }
 
 int	main(int argc, char **argv, char **envp)

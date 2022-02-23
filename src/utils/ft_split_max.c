@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 13:07:17 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/23 14:48:45 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:33:06 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		char_is_separator(char c, char *charset, char separator)
 	if (c == separator)
 	    return (2);
 	if (c == '\0')
-		return (1);
+		return (3);
 	return (0);
 }
 
@@ -101,10 +101,11 @@ static void	write_split(char **split, char *str, char *charset, char sep)
 			j++;
 		if (char_is_separator(str[i + j], charset, sep) == 1 && j == 0)
 		{
-			while(char_is_separator(str[i + j], charset, sep) == 1)
+			while(char_is_separator(str[i + j], charset, sep) == 1 && str[i + j] != '\0')
 				j++;
 		}
 		split[word] = (char*)malloc(sizeof(char) * (j + 1));
+		printf("j = %d\n", j);
 		write_word(split[word], str + i, charset, sep);
 		i += j;
 		word++;
@@ -117,6 +118,7 @@ char	**ft_split_max(char *str, char *charset, char sep)
 	int		words;
 
 	words = count_words(str, charset, sep);
+	printf("%d\n", words);
 	res = (char**)malloc(sizeof(char*) * (words + 1));
 	write_split(res, str, charset, sep);
 	res[words] = 0;
@@ -133,6 +135,8 @@ char	**ft_split_max(char *str, char *charset, char sep)
 // 	while(spt[i])
 // 	{
 // 		printf("elem - %s\n", spt[i]);
+// 		free(spt[i]);
 // 		i++;
 // 	}
+// 	free(spt);
 // }

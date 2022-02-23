@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:09:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/23 15:02:26 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:33:19 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	parse_handler(t_minishell *m_shell, char **str)
         	m_shell->str_exe = temp;
     	else
         	str_exe_addback(&m_shell->str_exe, temp);
+		free(buf);
 		buf = NULL;
         if (str[i] && type_searcher(str[i]) >= 0 && type_searcher(str[i]) <= 2)
             i++;

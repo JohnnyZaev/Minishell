@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:53:49 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/15 17:24:26 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/23 15:12:26 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,12 @@ void	envp_to_dict(t_envs **envs, char **envp)
 	i = -1;
 	while (envp[++i])
 		parce_envp(envs, envp[i]);
+	// if (search_envs(envs, "SHLVL"))
+	// {
+
+	// }
+	// else
+	// {
+
+	// }
 }

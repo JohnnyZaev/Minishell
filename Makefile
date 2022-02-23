@@ -6,14 +6,14 @@
 #    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/23 13:47:54 by ereginia         ###   ########.fr        #
+#    Updated: 2022/02/23 16:34:39 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				=	minishell
 
 CC					=	gcc
-CFLAGS				=	-O2 -Wall -Wextra -Werror
+CFLAGS				=	-g3 -O2 -Wall -Wextra -Werror
 
 RM					=	rm -rf
 

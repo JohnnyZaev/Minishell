@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_and_pids.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:00:45 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/22 15:52:24 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:29:43 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	**ft_piping(int count)
 		if (p_pipes[i] == NULL || pipe(p_pipes[i]) < 0)
 		{
 			ft_putstr_fd("pipe creation error\n", 2);
-			while (i > 0)
+			while (i > -1)
 			{
 				free(p_pipes[i]);
 				i--;
