@@ -6,14 +6,14 @@
 #    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/22 16:04:45 by gvarys           ###   ########.fr        #
+#    Updated: 2022/02/23 15:15:03 by gvarys           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				=	minishell
 
 CC					=	gcc
-CFLAGS				=	-O2 -Wall -Wextra -Werror
+CFLAGS				=	-g3 -O2 -Wall -Wextra -Werror
 
 RM					=	rm -rf
 

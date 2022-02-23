@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:09:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/22 11:42:11 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:17:47 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	parse_handler(t_minishell *m_shell, char **str)
         	m_shell->str_exe = temp;
     	else
         	str_exe_addback(&m_shell->str_exe, temp);
+		free(buf);
 		buf = NULL;
         if (str[i] && type_searcher(str[i]) >= 0 && type_searcher(str[i]) <= 2)
             i++;
