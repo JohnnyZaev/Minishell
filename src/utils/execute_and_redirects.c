@@ -6,11 +6,11 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:26:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/22 15:20:35 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:16:17 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 //запускает бинарник
 void	execute_process(char *c_line, t_envs *envs)
@@ -38,6 +38,13 @@ void	read_redirect(char *file_path)
 	int	fd_in;
 
 	fd_in = open(file_path, O_RDONLY);
+	if (fd_in < 0)
+	{
+		ft_putstr_fd("no such file or directory: ", 2);
+		ft_putstr_fd(file_path, 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
+	}
 	ft_dup(fd_in, 0);
 }
 

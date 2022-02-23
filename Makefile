@@ -6,7 +6,7 @@
 #    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/17 12:11:34 by ereginia         ###   ########.fr        #
+#    Updated: 2022/02/23 11:21:16 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,6 @@ HEADER_DIR			=	includes/
 
 LIBFT_DIR			=	libft/
 LIBFT				=	$(LIBFT_DIR)/libft.a
-
-READLINE_FLAGS		= -L/Users/gvarys/.brew/opt/readline/lib -I/Users/gvarys/.brew/opt/readline/include
 
 HEADER				=	$(HEADER_DIR)minishell.h
 
@@ -57,10 +55,10 @@ $(LIBFT)			:
 							make -C $(LIBFT_DIR)
 
 $(NAME)				:	$(OBJS)
-							$(CC) $(CFLAGS)  -lreadline -L/Users/ereginia/.brew/opt/readline/lib -I/Users/ereginia/.brew/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
+							$(CC) $(CFLAGS)  -lreadline -L${HOME}/.brew/opt/readline/lib -I${HOME}/.brew/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
 
 %.o					:	%.c $(HEADER)
-							$(CC) $(CFLAGS) -c $< -o $@
+							$(CC) $(CFLAGS) -I$(HEADER_DIR) -c $< -o $@
 
 clean				:
 							$(RM) $(OBJS)

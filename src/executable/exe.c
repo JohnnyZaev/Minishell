@@ -6,11 +6,11 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:09:59 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/22 15:11:34 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:51:45 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 int pids_counter(t_minishell	*m_shell)
 {

@@ -6,11 +6,11 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 13:07:17 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/22 11:58:31 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:52:31 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static int		char_is_separator(char c, char *charset, char separator)
 {
