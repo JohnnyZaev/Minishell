@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   envs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:53:49 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 15:12:26 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:20:04 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 char	*search_envs(t_envs **envs, char *key)
 {

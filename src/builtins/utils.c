@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:57:58 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 13:03:36 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:01:38 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,21 @@ int	builtints_handler(t_minishell *m_shell, char *str)
 	int	exit_status;
 
 	exit_status = 0;
-	if (!(strncmp(str, "cd", 2)) && (str[2] == ' ' || str[2] == 0))
+	if (!str)
+		return (exit_status);
+	if (!(ft_strncmp(str, "cd", 2)) && (str[2] == ' ' || str[2] == 0))
 		exit_status = 1;
-	if (!(strncmp(str, "echo", 4)) && (str[4] == ' ' || str[4] == 0))
+	if (!(ft_strncmp(str, "echo", 4)) && (str[4] == ' ' || str[4] == 0))
 		exit_status = 2;
-	if (!(strncmp(str, "env", 3)) && (str[3] == ' ' || str[3] == 0))
+	if (!(ft_strncmp(str, "env", 3)) && (str[3] == ' ' || str[3] == 0))
 		exit_status = 3;
-	if (!(strncmp(str, "exit", 4)) && (str[4] == ' ' || str[4] == 0))
+	if (!(ft_strncmp(str, "exit", 4)) && (str[4] == ' ' || str[4] == 0))
 		exit_status = 4;
-	if (!(strncmp(str, "export", 6)) && (str[6] == ' ' || str[6] == 0))
+	if (!(ft_strncmp(str, "export", 6)) && (str[6] == ' ' || str[6] == 0))
 		exit_status = 5;
-	if (!(strncmp(str, "pwd", 3)) && (str[3] == ' ' || str[3] == 0))
+	if (!(ft_strncmp(str, "pwd", 3)) && (str[3] == ' ' || str[3] == 0))
 		exit_status = 6;
-	if (!(strncmp(str, "unset", 5)) && (str[5] == ' ' || str[5] == 0))
+	if (!(ft_strncmp(str, "unset", 5)) && (str[5] == ' ' || str[5] == 0))
 		exit_status = 7;
 	if (exit_status)
 		return (execute_builtins(m_shell, str, exit_status));

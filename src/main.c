@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 16:32:42 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:25:22 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	exe_handler(t_minishell	*m_shell, char *str, char **envp)
 	i = -1;
 	while (++i < pipex.pid_count)
 		waitpid(pipex.pids[i], NULL, 0);
-	i = 0;
+	i = 0; 
 	while (i < pipex.pipe_count + 1 && pipex.pipe_count)
 	{
 		free(pipex.pipes[i]);
@@ -72,7 +72,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-	(void) envp;
 	ft_memset(&m_shell, 0, sizeof(m_shell));
 	envp_to_dict(&m_shell.envs, envp);
 	while (true)
@@ -83,7 +82,7 @@ int	main(int argc, char **argv, char **envp)
 			exit(printf("\033[Aminishell $ exit\n"));
 		add_history(str);
 		exe_handler(&m_shell, str, envp);
-		free(str);
+		free(str);	
 		free_str_exe(m_shell.str_exe);
 		m_shell.str_exe = NULL;
 	}

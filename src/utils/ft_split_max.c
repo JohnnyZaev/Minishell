@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 13:07:17 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/23 16:33:06 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:11:30 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ static void	write_split(char **split, char *str, char *charset, char sep)
 				j++;
 		}
 		split[word] = (char*)malloc(sizeof(char) * (j + 1));
-		printf("j = %d\n", j);
 		write_word(split[word], str + i, charset, sep);
 		i += j;
 		word++;
@@ -118,7 +117,6 @@ char	**ft_split_max(char *str, char *charset, char sep)
 	int		words;
 
 	words = count_words(str, charset, sep);
-	printf("%d\n", words);
 	res = (char**)malloc(sizeof(char*) * (words + 1));
 	write_split(res, str, charset, sep);
 	res[words] = 0;

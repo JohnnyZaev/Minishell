@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   envs_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:31:08 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/16 15:33:20 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:19:46 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 bool	valid_chars_in_env(char *key)
 {
