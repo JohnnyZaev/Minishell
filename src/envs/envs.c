@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:53:49 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 17:20:04 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:01:30 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,25 @@ void	parce_envp(t_envs **envs, char *envp)
 
 void	envp_to_dict(t_envs **envs, char **envp)
 {
-	int	i;
+	int		i;
+	char	*number;
+	char	*temp;
+	char	*temp2;
 
 	i = -1;
 	while (envp[++i])
 		parce_envp(envs, envp[i]);
-	// if (search_envs(envs, "SHLVL"))
-	// {
-
-	// }
-	// else
-	// {
-
-	// }
+	if (search_envs(envs, "SHLVL"))
+	{
+		number = ft_strdup(search_envs(envs, "SHLVL"));
+		remove_envs(envs, "SHLVL");
+		temp2 = ft_itoa(ft_atoi(number) + 1);
+		temp = ft_strjoin("SHLVL=", temp2);
+		parce_envp(envs, temp);
+		free(number);
+	}
+	else
+	{
+		parce_envp(envs, "SHLVL=1");
+	}
 }

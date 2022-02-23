@@ -6,11 +6,11 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 13:25:13 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/23 14:19:51 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:37:08 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 char	**get_envp(t_envs *envs)
 {
@@ -38,6 +38,5 @@ char	**get_envp(t_envs *envs)
 		words++;
 	}
 	result[words] = NULL;
-	printf("HERE\n");
 	return (result);
 }
