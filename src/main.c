@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/22 15:49:08 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 12:37:14 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	ft_memset(&m_shell, 0, sizeof(m_shell));
+	m_shell.envp_copy = envp;
 	envp_to_dict(&m_shell.envs, envp);
 	while (true)
 	{

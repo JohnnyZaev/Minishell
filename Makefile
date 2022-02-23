@@ -6,7 +6,7 @@
 #    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/23 11:21:16 by ereginia         ###   ########.fr        #
+#    Updated: 2022/02/23 11:24:14 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_FILES			=	main.c\
 						utils/error.c\
 						utils/ft_split_max.c\
 						utils/clean.c\
+						builtins/utils.c\
 						builtins/unset.c\
 						builtins/env.c\
 						builtins/exit.c\

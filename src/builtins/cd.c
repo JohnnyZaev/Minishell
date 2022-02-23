@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:30:05 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/22 15:51:34 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:24:26 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static bool	home_cd(t_minishell *m_shell)
 	return (true);
 }
 
-void	my_cd(t_minishell *m_shell, t_str_exe *str_exe)
+void	my_cd(t_minishell *m_shell, char *str_exe)
 {
 	char	old_pwd[PATH_MAX + 1];
 	char	new_pwd[PATH_MAX + 1];
@@ -59,14 +59,14 @@ void	my_cd(t_minishell *m_shell, t_str_exe *str_exe)
 	norm_status = getcwd(old_pwd, PATH_MAX + 1);
 	if (!norm_status)
 		exit(error(3));
-	if (!str_exe)
+	if (!(*str_exe))
 	{
 		if (!home_cd(m_shell))
 			exit(1);
 	}
 	else
 	{
-		if (chdir(str_exe->str_exe) == -1)
+		if (chdir(str_exe) == -1)
 		{
 			printf("minishell $ cd: No such file or directory\n");
 			exit(1);

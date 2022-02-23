@@ -6,14 +6,14 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:26:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/23 11:16:17 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 12:39:40 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //запускает бинарник
-void	execute_process(char *c_line, t_envs *envs)
+void	execute_process(char *c_line, t_envs *envs, char **envp_copy)
 {
 	char	**arg_vec1;
 	char	*bin_name;
@@ -21,12 +21,12 @@ void	execute_process(char *c_line, t_envs *envs)
 	arg_vec1 = ft_split(c_line, ' ');
 	if (!access(arg_vec1[0], 0))
 	{
-		execve(arg_vec1[0], arg_vec1, NULL);
+		execve(arg_vec1[0], arg_vec1, envp_copy);
 		free_split(arg_vec1);
 		exit(EXIT_FAILURE);
 	}
 	bin_name = ft_exist(search_envs(&envs, "PATH"), arg_vec1[0]);
-	execve(bin_name, arg_vec1, NULL);
+	execve(bin_name, arg_vec1, envp_copy);
 	free(bin_name);
 	free_split(arg_vec1);
 	exit(EXIT_SUCCESS);
