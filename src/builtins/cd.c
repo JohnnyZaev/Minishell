@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:30:05 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/22 16:42:53 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/23 11:24:26 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static void	update_pwds(t_minishell *m_shell, char *old_pwd, char *new_pwd)
 {
@@ -62,14 +62,14 @@ void	my_cd(t_minishell *m_shell, char *str_exe)
 	if (!(*str_exe))
 	{
 		if (!home_cd(m_shell))
-			return ;
+			exit(1);
 	}
 	else
 	{
 		if (chdir(str_exe) == -1)
 		{
 			printf("minishell $ cd: No such file or directory\n");
-			return ;
+			exit(1);
 		}
 	}
 	norm_status = getcwd(new_pwd, PATH_MAX + 1);

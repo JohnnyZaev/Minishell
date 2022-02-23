@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:09:59 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/22 16:51:30 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/23 12:39:09 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 int pids_counter(t_minishell	*m_shell)
 {
@@ -128,7 +128,7 @@ void	executable(t_minishell	*m_shell, t_str_exe *str_exec, t_pipes *pipex, int i
 		while(buf)
 		{
 			if (buf->type < 3)
-				execute_process(buf->str_exe, m_shell->envs);
+				execute_process(buf->str_exe, m_shell->envs, m_shell->envp_copy);
 			buf = buf->next;
 		}
 		exit(1);

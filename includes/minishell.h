@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/22 16:04:19 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/23 12:38:59 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_envs
 
 typedef struct s_minishell
 {
+	char		**envp_copy;
 	t_envs		*envs;
 	t_str_exe	*str_exe;
 }	t_minishell;
@@ -79,7 +80,7 @@ void		close_unusedpipes(int **pipes, int pipe_num1, int pipe_num2, int count);
 void		wait_all_pids(int pids_count);
 
 //execute_and_redirects.c
-void	execute_process(char *c_line, t_envs *envs);
+void	execute_process(char *c_line, t_envs *envs, char **envp_copy);
 void	read_redirect(char *file_path);
 void	write_redirect(char *file_path, int mode);
 void	read_heredoc_process(char *stop, int fd);

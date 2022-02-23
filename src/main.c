@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 15:46:24 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/23 16:29:44 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	ft_memset(&m_shell, 0, sizeof(m_shell));
+	m_shell.envp_copy = envp;
 	envp_to_dict(&m_shell.envs, envp);
 	while (true)
 	{
