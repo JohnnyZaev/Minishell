@@ -6,11 +6,11 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:57:58 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 12:36:52 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 13:03:36 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static int	execute_builtins(t_minishell *m_shell, char *str, int id)
 {

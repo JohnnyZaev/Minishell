@@ -6,13 +6,13 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:09:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/22 11:42:11 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:02:26 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_str_exe	*parse_redirects(t_minishell *m_shell, t_str_exe	*temp, char **str, int *i)
+static t_str_exe	*parse_redirects(t_minishell *m_shell, t_str_exe *temp, char **str, int *i)
 {
     int m;
 

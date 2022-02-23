@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/22 11:51:17 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:51:51 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	parse_str(t_minishell *m_shell, char *str)
 		exit(1);
 	if (ft_strlen(str_temp) == 0)
 		return ;
-	str_split = ft_split_max(str, "><|;", ' ');
+	str_split = ft_split_max(str_temp, "><|;", ' ');
 	if (!str_split)
 		exit(1);
 	free(str_temp);

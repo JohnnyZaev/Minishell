@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 13:07:17 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/22 15:52:31 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:48:45 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ char	**ft_split_max(char *str, char *charset, char sep)
 // {
 // 	int i = 0;
 // 	char **spt;
-// 	char str[] = "ls ;";
+// 	char str[] = "ls ; pwd ;";
 
 // 	spt = ft_split_max(str, "><|;", ' ');
 // 	while(spt[i])

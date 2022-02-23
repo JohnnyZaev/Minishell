@@ -6,7 +6,7 @@
 #    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/23 11:24:14 by ereginia         ###   ########.fr        #
+#    Updated: 2022/02/23 13:47:54 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC_FILES			=	main.c\
 						envs/envs.c\
 						envs/envs_utils.c\
 						executable/exe.c\
+						executable/exe_utils.c\
 						signals/signals.c\
 						parser/parser.c\
 						parser/parser_utils.c

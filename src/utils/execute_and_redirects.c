@@ -6,27 +6,36 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:26:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/23 12:39:40 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:36:16 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //запускает бинарник
-void	execute_process(char *c_line, t_envs *envs, char **envp_copy)
+void	execute_process(char *c_line, t_minishell *m_shell)
 {
 	char	**arg_vec1;
+	char	**env;
 	char	*bin_name;
 
 	arg_vec1 = ft_split(c_line, ' ');
+	env = get_envp(m_shell->envs);
 	if (!access(arg_vec1[0], 0))
 	{
-		execve(arg_vec1[0], arg_vec1, envp_copy);
+		execve(arg_vec1[0], arg_vec1, env);
 		free_split(arg_vec1);
 		exit(EXIT_FAILURE);
 	}
-	bin_name = ft_exist(search_envs(&envs, "PATH"), arg_vec1[0]);
-	execve(bin_name, arg_vec1, envp_copy);
+	bin_name = ft_exist(search_envs(&m_shell->envs, "PATH"), arg_vec1[0]);
+	if (!bin_name)
+	{
+		ft_putstr_fd("command not found: ", 2);
+		ft_putstr_fd(arg_vec1[0], 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
+	}
+	execve(bin_name, arg_vec1, env);
 	free(bin_name);
 	free_split(arg_vec1);
 	exit(EXIT_SUCCESS);
