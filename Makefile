@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
+#    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/23 16:34:39 by ereginia         ###   ########.fr        #
+#    Updated: 2022/02/24 13:11:56 by gvarys           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ NAME				=	minishell
 
 CC					=	gcc
 CFLAGS				=	-g3 -O2 -Wall -Wextra -Werror
+
+HOME_FLAGS			=	-L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
 
 RM					=	rm -rf
 
@@ -57,7 +59,7 @@ $(LIBFT)			:
 							make -C $(LIBFT_DIR)
 
 $(NAME)				:	$(OBJS)
-							$(CC) $(CFLAGS)  -lreadline -L${HOME}/.brew/opt/readline/lib -I${HOME}/.brew/opt/readline/include -L$(LIBFT_DIR) -lft $(OBJS) -o $@
+							$(CC) $(CFLAGS)  -lreadline $(HOME_FLAGS) -L$(LIBFT_DIR) -lft $(OBJS) -o $@
 
 %.o					:	%.c $(HEADER)
 							$(CC) $(CFLAGS) -I$(HEADER_DIR) -c $< -o $@
