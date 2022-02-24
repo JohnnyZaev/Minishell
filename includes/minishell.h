@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 14:21:13 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/24 13:21:35 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int			which_pipe(t_str_exe *str_exec);
 char		**get_envp(t_envs *envs);
 
 //builtins
-int			builtints_handler(t_minishell *m_shell, char *str);
+int			builtints_handler(t_minishell *m_shell, char *str, bool flag);
 void		unset(t_minishell *m_shell, char *str_exe);
 void		env(t_envs *envs);
 void		my_exit(char *str_exe);
