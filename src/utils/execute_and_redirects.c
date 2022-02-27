@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:26:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/23 14:36:16 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/27 12:49:48 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,24 @@ void	write_redirect(char *file_path, int mode)
 //heredoc
 void	read_heredoc_process(char *stop, int fd)
 {
-	int		readed;
-	int		len;
 	char	*buf;
+	char	*pre_res;
+	char	*result;
 
-	readed = 1;
-	len = ft_strlen(stop);
-	buf = (char *)malloc(len);
-	while (1)
+	buf = NULL;
+	result = ft_strdup("");
+	while (true)
 	{
 		write(1, "> ", 2);
-		readed = read(0, &buf, len);
-		if (!ft_strncmp(buf, stop, len) || readed > 0)
+		buf = get_next_line(0);
+		pre_res = result;
+		if (!ft_strncmp(buf, stop, ft_strlen(stop)))
 			break ;
-		write(fd, &buf, readed);
+		result = ft_strjoin(result, buf);
+		free(buf);
+		free(pre_res);
 	}
-	free(buf);
+	write(fd, result, ft_strlen(result));
+	free(result);
+	exit(0);
 }

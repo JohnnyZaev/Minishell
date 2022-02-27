@@ -59,4 +59,3 @@ dkms.conf
 .vscode
 
 file*
-src/main.c

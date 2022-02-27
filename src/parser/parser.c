@@ -6,11 +6,11 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 14:51:51 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/27 16:27:20 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 int	type_searcher(char *str)
 {
@@ -38,7 +38,10 @@ t_str_exe	*create_str_exe(char *content)
 	new = (t_str_exe *)ft_calloc(1, sizeof(t_str_exe));
 	if (!new)
 		return (new);
-	new->str_exe = ft_strdup(content);
+	if (content)
+		new->str_exe = ft_strdup(content);
+	else
+		new->str_exe = NULL;
 	return (new);
 }
 

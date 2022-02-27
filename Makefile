@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/24 13:11:56 by gvarys           ###   ########.fr        #
+#    Updated: 2022/02/27 15:51:41 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME				=	minishell
 CC					=	gcc
 CFLAGS				=	-g3 -O2 -Wall -Wextra -Werror
 
-HOME_FLAGS			=	-L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
+HOME_FLAGS			=	-L${HOME}/.brew/opt/readline/lib -I${HOME}/.brew/opt/readline/include
 
 RM					=	rm -rf
 
@@ -34,6 +34,7 @@ SRC_FILES			=	main.c\
 						utils/execute_and_redirects.c\
 						utils/error.c\
 						utils/ft_split_max.c\
+						utils/ft_split_delux.c\
 						utils/clean.c\
 						builtins/utils.c\
 						builtins/unset.c\

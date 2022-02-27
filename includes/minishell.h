@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/24 13:21:35 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/27 15:48:02 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ void		parse_handler(t_minishell *m_shell, char **str);
 
 // utils/ft_split_max.c
 char	**ft_split_max(char *str, char *charset, char sep);
+// utils/ft_split_delux.c
+char	**ft_split_delux(char *str, char *charset, char sep);
 
 // utils/clean.c
 void		free_split(char **tofree);

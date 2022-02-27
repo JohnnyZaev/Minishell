@@ -6,17 +6,17 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:09:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/23 16:33:19 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/27 11:49:05 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static t_str_exe	*parse_redirects(t_minishell *m_shell, t_str_exe *temp, char **str, int *i)
 {
-    int m;
+	int m;
 
-    m = *i;
+	m = *i;
 	while (str[m] && type_searcher(str[m]) != 1 && type_searcher(str[m]) != 2)
 	{
 		if (type_searcher(str[m]) > 2)
@@ -70,27 +70,27 @@ static char	*parse_cmd(char **str, int i)
 void	parse_handler(t_minishell *m_shell, char **str)
 {
 	t_str_exe	*temp;
-	char        *buf;
+	char		*buf;
 	int			i;
-	int         m;
+	int			m;
 
 	temp = NULL;
 	buf = NULL;
 	i = 0;
 	while (str[i])
 	{
-	    m = i;
+		m = i;
 		temp = parse_redirects(m_shell, temp, str, &i);
 		buf = parse_cmd(str, m);
-        temp = create_str_exe(buf);
-        temp->type = type_searcher(str[i]);
-    	if (!m_shell->str_exe)
-        	m_shell->str_exe = temp;
-    	else
-        	str_exe_addback(&m_shell->str_exe, temp);
+		temp = create_str_exe(buf);
+		temp->type = type_searcher(str[i]);
+		if (!m_shell->str_exe)
+			m_shell->str_exe = temp;
+		else
+			str_exe_addback(&m_shell->str_exe, temp);
 		free(buf);
 		buf = NULL;
-        if (str[i] && type_searcher(str[i]) >= 0 && type_searcher(str[i]) <= 2)
-            i++;
+		if (str[i] && type_searcher(str[i]) >= 0 && type_searcher(str[i]) <= 2)
+			i++;
 	}
 }

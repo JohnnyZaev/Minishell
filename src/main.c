@@ -6,34 +6,34 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 17:25:22 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/02/27 16:12:08 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static	void print_str_exe(t_str_exe *str_exe)
-// {
-// 	t_str_exe *buf;
+static	void print_str_exe(t_str_exe *str_exe)
+{
+	t_str_exe *buf;
 
-// 	buf = str_exe;
-// 	while (buf)
-// 	{
-// 		printf("STR -> %s, TYPE -> %d\n", buf->str_exe, buf->type);
-// 		buf = buf->next;
-// 	}
-// }
+	buf = str_exe;
+	while (buf)
+	{
+		printf("STR -> %s, TYPE -> %d\n", buf->str_exe, buf->type);
+		buf = buf->next;
+	}
+}
 
 void	exe_handler(t_minishell	*m_shell, char *str, char **envp)
 {
 	t_str_exe	*buf;
 	t_pipes		pipex;
-	int         i;
+	int			i;
 
 	(void)envp;
     parse_str(m_shell, str);
 	ft_memset(&pipex, 0, sizeof(pipex));
-	// print_str_exe(m_shell->str_exe);
+	print_str_exe(m_shell->str_exe);
 	pipex.pid_count = pids_counter(m_shell);
 	pipex.pipe_count = pipes_counter(m_shell);
 	pipex.pipes = ft_piping(pipex.pipe_count);
@@ -47,6 +47,7 @@ void	exe_handler(t_minishell	*m_shell, char *str, char **envp)
 		i++;
 	}
 	i = -1;
+	close_unusedpipes(pipex.pipes, -1, -1, pipex.pipe_count);
 	while (++i < pipex.pid_count)
 		waitpid(pipex.pids[i], NULL, 0);
 	i = 0; 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_max.c                                     :+:      :+:    :+:   */
+/*   ft_split_delux.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 13:07:17 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/27 15:52:12 by ereginia         ###   ########.fr       */
+/*   Created: 2022/02/27 13:44:42 by ereginia          #+#    #+#             */
+/*   Updated: 2022/02/27 15:46:52 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,28 @@ static int		char_is_separator(char c, char *charset, char separator)
 static int		count_words(char *str, char *charset, char sep)
 {
 	int	i;
+	int flag;
 	int	words;
 
 	words = 0;
+	flag = 0;
 	i = 0;
 	while (str[i] != '\0')
 	{
+		if (str[i] == '\'')
+			flag = 1;
+		if (str[i] == '\"')
+			flag = 2;
+		while (str[i] && flag)
+		{
+			i++;
+			if (str[i] == '\'' && flag == 1)
+				flag = !flag;
+			if (str[i] == '\"' && flag == 2)
+				flag = !flag;
+		}
+		if (flag)
+		    return -1;
 		if (char_is_separator(str[i + 1], charset, sep) > 0
 				&& char_is_separator(str[i], charset, sep) == 0)
 			words++;
@@ -59,25 +75,15 @@ static int		count_words(char *str, char *charset, char sep)
 	return (words);
 }
 
-static void	write_word(char *dest, char *from, char *charset, char sep)
+static void	write_word(char *dest, char *from, int size)
 {
 	int	i;
 
 	i = 0;
-	if (char_is_separator(from[0], charset, sep) == 1)
+	while (from[i] && i < size)
 	{
-	    while (char_is_separator(from[i], charset, sep) == 1)
-		{
-	        dest[i] = from[i];
-			i++;
-		}
-	    dest[i] = '\0';
-	    return ;
-	}
-	while (char_is_separator(from[i], charset, sep) == 0)
-	{
-		dest[i] = from[i];
-		i++;
+	    dest[i] = from[i];
+	    i++;
 	}
 	dest[i] = '\0';
 }
@@ -87,8 +93,10 @@ static void	write_split(char **split, char *str, char *charset, char sep)
 	int		i;
 	int		j;
 	int		word;
+	int     flag;
 
 	word = 0;
+	flag = 0;
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -97,44 +105,65 @@ static void	write_split(char **split, char *str, char *charset, char sep)
 			i++;
 		if (!str[i])
 		    return ;
-		while (char_is_separator(str[i + j], charset, sep) == 0)
-			j++;
+		if (str[i + j] == '\'')
+			flag = 1;
+		if (str[i + j] == '\"')
+			flag = 2;
+		if (flag)
+		{
+    		while (str[i + j] && flag)
+    		{
+    			j++;
+    			if (str[i + j] == '\'' && flag == 1)
+    				flag = !flag;
+    			if (str[i + j] == '\"' && flag == 2)
+    				flag = !flag;
+    		}
+    		j++;
+		}
+		if (j == 0)
+		{
+		    while (char_is_separator(str[i + j], charset, sep) == 0 && str[i + j] != '\'' && str[i + j] != '\"')
+			    j++;
+		}
 		if (char_is_separator(str[i + j], charset, sep) == 1 && j == 0)
 		{
 			while(char_is_separator(str[i + j], charset, sep) == 1 && str[i + j] != '\0')
 				j++;
 		}
 		split[word] = (char*)malloc(sizeof(char) * (j + 1));
-		write_word(split[word], str + i, charset, sep);
+		write_word(split[word], str + i, j);
 		i += j;
 		word++;
 	}
 }
 
-char	**ft_split_max(char *str, char *charset, char sep)
+char	**ft_split_delux(char *str, char *charset, char sep)
 {
 	char	**res;
 	int		words;
 
 	words = count_words(str, charset, sep);
+	if (words < 0)
+	    return (NULL);
 	res = (char**)malloc(sizeof(char*) * (words + 1));
 	write_split(res, str, charset, sep);
 	res[words] = 0;
 	return (res);
 }
 
-// int main()
+// int main(int argc, char **argv)
 // {
 // 	int i = 0;
 // 	char **spt;
-// 	char str[] = "<file2 \"wc <<file4\" >file3";
 
-// 	spt = ft_split_max(str, "><|;", ' ');
-// 	while(spt[i])
-// 	{
-// 		printf("elem - %s\n", spt[i]);
-// 		free(spt[i]);
-// 		i++;
-// 	}
-// 	free(spt);
+// 	printf("%d\n", count_words(argv[1]));
+// 	// spt = ft_split_delux(str);
+// 	// while(spt[i])
+// 	// {
+// 	// 	printf("elem - %s\n", spt[i]);
+// 	// 	free(spt[i]);
+// 	// 	i++;
+// 	// }
+// 	// free(spt);
 // }
