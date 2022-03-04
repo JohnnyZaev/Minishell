@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:09:59 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/04 13:31:04 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/04 14:30:25 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ void	executable(t_minishell *m_shell, t_str_exe *str_exec,
 				&& get_next_pipe(str_exec)->prev->type == 5)))
 	{
 		close_unusedpipes(pipex->pipes, -1, -1, pipe_id);
-		waitpid(-1, &m_shell->error_code, 0);
-		WEXITSTATUS(m_shell->error_code);
-		printf("%d\n", ((m_shell->error_code)));
+		waitpid(pipex->pids[i], &m_shell->error_code, 0);
 	}
 }

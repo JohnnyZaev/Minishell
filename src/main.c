@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 13:27:58 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/04 14:30:32 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ void	exe_handler(t_minishell	*m_shell, char *str)
 	i = -1;
 	close_unusedpipes(pipex.pipes, -1, -1, pipex.pipe_count);
 	while (++i < pipex.pid_count)
-		waitpid(-1, &m_shell->error_code, 0);
-	m_shell->error_code = WEXITSTATUS(m_shell->error_code);
-	printf("%d\n", ((m_shell->error_code)));
+		waitpid(pipex.pids[i], &m_shell->error_code, 0);
 	i = 0; 
 	while (i < pipex.pipe_count + 1 && pipex.pipe_count)
 	{
