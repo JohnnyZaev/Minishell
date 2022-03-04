@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:52:41 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/04 11:17:47 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:23:18 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,21 @@ static int dollar_len(t_minishell *m_shell, char *str, int *l)
     char *buf;
 
     
-    while (str[i + 1] && ft_isalnum(str[i + 1]))
+    while (str[i + 1] && (ft_isalnum(str[i + 1]) || str[i + 1] == '?'))
         i++;
     *l = *l + i + 1;
     buf = ft_substr(str, 1, i);
-    k = ft_strlen(search_envs(&m_shell->envs, buf));
+    if (!ft_strncmp(buf, "?", 2))
+    {
+        k++;
+        while (i / 10)
+        {
+            i = i / 10;
+            k++;
+        }
+    }
+    else
+        k = ft_strlen(search_envs(&m_shell->envs, buf));
     free(buf);
     return (k);
 }
@@ -125,10 +135,13 @@ static char *word_replace(t_minishell *m_shell, char *str)
             res[k] = str[i];
         else
         {
-            while (str[i + j + 1] && ft_isalnum(str[i + j + 1]))
+            while (str[i + j + 1] && (ft_isalnum(str[i + j + 1]) || str[i + j + 1] == '?'))
                 j++;
             buf = ft_substr(&str[i], 1, j);
-            temp = search_envs(&m_shell->envs, buf);
+            if (!ft_strncmp(buf, "?", 2))
+                temp = ft_itoa(m_shell->error_code);
+            else
+                temp = search_envs(&m_shell->envs, buf);
             ft_strlcpy(&res[k], temp, ft_strlen(temp) + 1);
             k = k + ft_strlen(temp);
             free(buf);

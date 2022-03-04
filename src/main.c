@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/02 15:48:09 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 14:07:31 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	exe_handler(t_minishell	*m_shell, char *str)
 	i = -1;
 	close_unusedpipes(pipex.pipes, -1, -1, pipex.pipe_count);
 	while (++i < pipex.pid_count)
-		waitpid(pipex.pids[i], NULL, 0);
+		waitpid(pipex.pids[i], &m_shell->error_code, 0);
 	i = 0; 
 	while (i < pipex.pipe_count + 1 && pipex.pipe_count)
 	{
