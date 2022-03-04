@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:59:10 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 12:25:57 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/04 15:37:59 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	my_echo(char *str_exe, t_minishell *m_shell)
 	flag = true;
 	if (str_exe[0])
 	{
-		str_split = ft_split(str_exe, ' ');
+		str_split = comma_killer(str_exe);
 		if (!str_split)
 			exit(error(1));
 		i = 0;
@@ -48,4 +48,5 @@ void	my_echo(char *str_exe, t_minishell *m_shell)
 	if (flag)
 		printf("\n");
 	m_shell->error_code = 0;
+	exit(0);
 }

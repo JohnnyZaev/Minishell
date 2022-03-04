@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:57:58 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 14:09:19 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/04 16:29:48 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 static int	execute_builtins(t_minishell *m_shell, char *str, int id)
 {
 	if (id == 1)
-		my_cd(m_shell, str + 3);
+		my_cd(m_shell, str);
 	if (id == 5)
+	{
+		m_shell->error_code = 0;
 		my_echo(str + 5, m_shell);
+	}
 	if (id == 6)
 	{
-		env(m_shell->envs);
 		m_shell->error_code = 0;
+		env(m_shell->envs);
 	}
 	if (id == 2)
 		my_exit(str + 5);
@@ -29,8 +32,8 @@ static int	execute_builtins(t_minishell *m_shell, char *str, int id)
 		my_export(m_shell, str + 6);
 	if (id == 7)
 	{
-		my_pwd();
 		m_shell->error_code = 0;
+		my_pwd();
 	}
 	if (id == 4)
 		unset(m_shell, str + 6);

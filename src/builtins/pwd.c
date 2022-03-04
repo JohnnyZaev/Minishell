@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:53:52 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 11:24:32 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:26:08 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ void	my_pwd(void)
 	if (!getcwd(pwd, PATH_MAX + 1))
 		exit(error(3));
 	printf("%s\n", pwd);
+	exit(0);
 }

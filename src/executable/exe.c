@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:09:59 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/04 14:30:25 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/04 16:36:35 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ void	executable(t_minishell *m_shell, t_str_exe *str_exec,
 	{
 		close_unusedpipes(pipex->pipes, -1, -1, pipe_id);
 		waitpid(pipex->pids[i], &m_shell->error_code, 0);
+		m_shell->error_code = WEXITSTATUS(m_shell->error_code);
 	}
 }

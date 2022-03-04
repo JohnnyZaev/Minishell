@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:53:49 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 18:01:30 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 15:03:14 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	envp_to_dict(t_envs **envs, char **envp)
 		temp2 = ft_itoa(ft_atoi(number) + 1);
 		temp = ft_strjoin("SHLVL=", temp2);
 		parce_envp(envs, temp);
+		free(temp2);
+		free(temp);
 		free(number);
 	}
 	else

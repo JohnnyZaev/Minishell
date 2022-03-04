@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inseption_split.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:52:41 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/04 14:23:18 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 16:10:38 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ static char *word_replace(t_minishell *m_shell, char *str)
                 temp = search_envs(&m_shell->envs, buf);
             ft_strlcpy(&res[k], temp, ft_strlen(temp) + 1);
             k = k + ft_strlen(temp);
+			if (!search_envs(&m_shell->envs, buf))
+				free(temp);
             free(buf);
             i = i + j + 1;
             j = 0;

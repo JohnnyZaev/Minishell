@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:30:05 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 12:31:32 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/04 15:58:00 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,32 @@ void	my_cd(t_minishell *m_shell, char *str_exe)
 	char	old_pwd[PATH_MAX + 1];
 	char	new_pwd[PATH_MAX + 1];
 	char	*norm_status;
+	char	**str_split;
 
 	norm_status = getcwd(old_pwd, PATH_MAX + 1);
+	str_split = comma_killer(str_exe);
 	if (!norm_status)
 		exit(error(3));
-	if (!(*str_exe))
+	if (!(str_split[1]))
 	{
 		if (!home_cd(m_shell))
 			exit(1);
 	}
-	else if (*str_exe)
+	else if (str_split[1])
 	{
-		if (chdir(str_exe) == -1)
+		if (chdir(str_split[1]) == -1)
 		{
 			printf("minishell $ cd: No such file or directory\n");
 			m_shell->error_code = 1;
 		}
+		else
+		{
+			norm_status = getcwd(new_pwd, PATH_MAX + 1);
+			if (!norm_status)
+				exit(error(3));
+			update_pwds(m_shell, old_pwd, new_pwd);
+			m_shell->error_code = 0;
+		}
 	}
-	else
-	{
-		norm_status = getcwd(new_pwd, PATH_MAX + 1);
-		if (!norm_status)
-			exit(error(3));
-		update_pwds(m_shell, old_pwd, new_pwd);
-		m_shell->error_code = 0;
-	}
+	free_split(str_split);
 }

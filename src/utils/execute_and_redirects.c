@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:26:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/04 13:11:00 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/04 15:11:13 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	execute_process(char *c_line, t_minishell *m_shell)
 		ft_putstr_fd("command not found: ", 2);
 		ft_putstr_fd(arg_vec1[0], 2);
 		ft_putstr_fd("\n", 2);
-		exit(1);
+		m_shell->error_code = 127;
+		exit(127);
 	}
 	execve(bin_name, arg_vec1, env);
 	free(bin_name);
