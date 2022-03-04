@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/27 16:12:08 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/02 15:48:09 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ static	void print_str_exe(t_str_exe *str_exe)
 	}
 }
 
-void	exe_handler(t_minishell	*m_shell, char *str, char **envp)
+void	exe_handler(t_minishell	*m_shell, char *str)
 {
 	t_str_exe	*buf;
 	t_pipes		pipex;
 	int			i;
 
-	(void)envp;
     parse_str(m_shell, str);
 	ft_memset(&pipex, 0, sizeof(pipex));
 	print_str_exe(m_shell->str_exe);
@@ -82,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!str)
 			exit(printf("\033[Aminishell $ exit\n"));
 		add_history(str);
-		exe_handler(&m_shell, str, envp);
+		exe_handler(&m_shell, str);
 		free(str);	
 		free_str_exe(m_shell.str_exe);
 		m_shell.str_exe = NULL;
@@ -92,29 +91,19 @@ int	main(int argc, char **argv, char **envp)
 
 // int	main(int argc, char **argv, char **envp)
 // {
+// 	char		*str;
 // 	t_minishell	m_shell;
-// 	t_str_exe	*buf;
-// 	int		    **pipes;
-// 	int		    *pids;
-// 	int         i = 0;
 
-// 	(void)argc;
-//     memset(&m_shell, 0, sizeof(m_shell));
-//     parse_str(&m_shell, argv[1]);
-// 	print_str_exe(m_shell.str_exe);
-// 	pipes = ft_piping(pipes_counter(&m_shell));
-// 	pids = ft_piding(pids_counter(&m_shell));
-// 	buf = m_shell.str_exe;
-// 	while (i < pids_counter(&m_shell))
-// 	{
-// 	    // printf("pipe exist %d\n", pipe_type(buf));
-// 	    executable(buf, envp, &pids[i], pipes);
-// 	    buf = get_next_pipe(buf);
-// 	    i++;
-// 	}
-// 	i = -1;
-// 	close_unusedpipes(pipes, -1, -1, pipes_counter(&m_shell));
-// 	while (++i < pids_counter(&m_shell))
-// 	    waitpid(pids[i], NULL, 0);
-//     return (0);
+// 	(void) argc;
+// 	str = argv[1];
+//     // str = "\"ls\" pwd\"<file3\"fe$PWDefwg4 <file2 | wc";
+//     // str = "\"$HOME $PWD\"pwd";
+//     // str = "'$HOSTNAME' '$PWD '";
+//     str = "$HOME_$PWD"; //1
+// 	memset(&m_shell, 0, sizeof(m_shell));
+// 	envp_to_dict(&m_shell.envs, envp);
+// 	exe_handler(&m_shell, str);
+// 	free_str_exe(m_shell.str_exe);
+// 	m_shell.str_exe = NULL;
+// 	return (0);
 // }

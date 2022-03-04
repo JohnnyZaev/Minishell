@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:26:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/27 12:49:48 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 11:24:03 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	execute_process(char *c_line, t_minishell *m_shell)
 	char	**env;
 	char	*bin_name;
 
-	arg_vec1 = ft_split(c_line, ' ');
+	arg_vec1 = comma_killer(c_line);
 	env = get_envp(m_shell->envs);
 	if (!access(arg_vec1[0], 0))
 	{

@@ -6,7 +6,7 @@
 #    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/27 15:51:41 by ereginia         ###   ########.fr        #
+#    Updated: 2022/03/04 11:22:02 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRC_FILES			=	main.c\
 						utils/execute_and_redirects.c\
 						utils/error.c\
 						utils/ft_split_max.c\
-						utils/ft_split_delux.c\
 						utils/clean.c\
 						builtins/utils.c\
 						builtins/unset.c\
@@ -50,7 +49,10 @@ SRC_FILES			=	main.c\
 						executable/exe_utils.c\
 						signals/signals.c\
 						parser/parser.c\
-						parser/parser_utils.c
+						parser/parser_utils.c\
+						parser/ft_split_delux.c\
+						parser/inseption_split.c\
+						parser/comma_killer.c
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))
 

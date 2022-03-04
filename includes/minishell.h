@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/27 15:48:02 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 11:23:06 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,10 @@ void		free_str_exe(t_str_exe *str_exe);
 t_str_exe	*create_str_exe(char *content);
 // parser/parser_utils.c
 void		parse_handler(t_minishell *m_shell, char **str);
+// parser/inseption_split.c
+void split_inseption(t_minishell *m_shell, char **spt);
+// parser/comma_killer.c
+char **comma_killer(char *str);
 
 // utils/ft_split_max.c
 char	**ft_split_max(char *str, char *charset, char sep);

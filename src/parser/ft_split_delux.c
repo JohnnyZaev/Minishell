@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:44:42 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/27 15:46:52 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/02 10:49:32 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int		count_words(char *str, char *charset, char sep)
 	words = 0;
 	flag = 0;
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
 		if (str[i] == '\'')
 			flag = 1;
@@ -88,6 +88,39 @@ static void	write_word(char *dest, char *from, int size)
 	dest[i] = '\0';
 }
 
+static int  one_word(char *str, char *charset, char sep)
+{
+    int j;
+    int flag;
+    
+    j = 0;
+    flag = 0;
+    while (str[j] && char_is_separator(str[j], charset, sep) == 0)
+    {
+		if (str[j] == '\'')
+			flag = 1;
+		if (str[j] == '\"')
+			flag = 2;
+		if (flag)
+		{
+    		while (str[j] && flag)
+    		{
+    			j++;
+    			if (str[j] == '\'' && flag == 1)
+    				flag = !flag;
+    			if (str[j] == '\"' && flag == 2)
+    				flag = !flag;
+    		}
+    		j++;
+    		flag = 0;
+    		continue ;
+		}
+        while (str[j] && char_is_separator(str[j], charset, sep) == 0 && str[j] != '\'' && str[j] != '\"')
+            j++;
+    }
+    return j;
+}
+
 static void	write_split(char **split, char *str, char *charset, char sep)
 {
 	int		i;
@@ -105,27 +138,7 @@ static void	write_split(char **split, char *str, char *charset, char sep)
 			i++;
 		if (!str[i])
 		    return ;
-		if (str[i + j] == '\'')
-			flag = 1;
-		if (str[i + j] == '\"')
-			flag = 2;
-		if (flag)
-		{
-    		while (str[i + j] && flag)
-    		{
-    			j++;
-    			if (str[i + j] == '\'' && flag == 1)
-    				flag = !flag;
-    			if (str[i + j] == '\"' && flag == 2)
-    				flag = !flag;
-    		}
-    		j++;
-		}
-		if (j == 0)
-		{
-		    while (char_is_separator(str[i + j], charset, sep) == 0 && str[i + j] != '\'' && str[i + j] != '\"')
-			    j++;
-		}
+        j = one_word(&str[i], charset, sep);
 		if (char_is_separator(str[i + j], charset, sep) == 1 && j == 0)
 		{
 			while(char_is_separator(str[i + j], charset, sep) == 1 && str[i + j] != '\0')
