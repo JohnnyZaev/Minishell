@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/02 15:48:09 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:27:58 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ void	exe_handler(t_minishell	*m_shell, char *str)
 	i = -1;
 	close_unusedpipes(pipex.pipes, -1, -1, pipex.pipe_count);
 	while (++i < pipex.pid_count)
-		waitpid(pipex.pids[i], NULL, 0);
+		waitpid(-1, &m_shell->error_code, 0);
+	m_shell->error_code = WEXITSTATUS(m_shell->error_code);
+	printf("%d\n", ((m_shell->error_code)));
 	i = 0; 
 	while (i < pipex.pipe_count + 1 && pipex.pipe_count)
 	{
@@ -79,7 +81,10 @@ int	main(int argc, char **argv, char **envp)
 		start_signals();
 		str = readline("minishell $ ");
 		if (!str)
-			exit(printf("\033[Aminishell $ exit\n"));
+		{
+			printf("\033[Aminishell $ exit\n");
+			exit(0);
+		}
 		add_history(str);
 		exe_handler(&m_shell, str);
 		free(str);	

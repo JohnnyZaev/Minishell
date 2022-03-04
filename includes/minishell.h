@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 12:16:57 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/04 12:58:54 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,6 @@ void		my_exit(char *str_exe);
 void		my_pwd(void);
 void		my_export(t_minishell *m_shell, char *str_exe);
 void		my_cd(t_minishell *m_shell, char *str_exe);
-void		my_echo(char *str_exe);
+void		my_echo(char *str_exe, t_minishell *m_shell);
 
 #endif

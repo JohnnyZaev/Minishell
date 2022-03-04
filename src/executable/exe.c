@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:09:59 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/27 13:26:15 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:31:04 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	executable(t_minishell *m_shell, t_str_exe *str_exec,
 				&& get_next_pipe(str_exec)->prev->type == 5)))
 	{
 		close_unusedpipes(pipex->pipes, -1, -1, pipe_id);
-		waitpid(pipex->pids[i], NULL, 0);
+		waitpid(-1, &m_shell->error_code, 0);
+		WEXITSTATUS(m_shell->error_code);
+		printf("%d\n", ((m_shell->error_code)));
 	}
 }

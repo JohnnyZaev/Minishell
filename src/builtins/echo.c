@@ -6,13 +6,13 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:59:10 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/22 17:40:33 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/04 12:25:57 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	my_echo(char *str_exe)
+void	my_echo(char *str_exe, t_minishell *m_shell)
 {
 	bool	flag;
 	char	**str_split;
@@ -47,4 +47,5 @@ void	my_echo(char *str_exe)
 	}
 	if (flag)
 		printf("\n");
+	m_shell->error_code = 0;
 }

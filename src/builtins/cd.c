@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:30:05 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 11:24:26 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 12:31:32 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static bool	home_cd(t_minishell *m_shell)
 	if (!home)
 	{
 		printf("minishell $ cd: HOME not set");
+		m_shell->error_code = 1;
 		return (false);
 	}
 	else
@@ -44,6 +45,7 @@ static bool	home_cd(t_minishell *m_shell)
 		if (chdir(home) == -1)
 		{
 			printf("minishell $ cd: No such file or directory\n");
+			m_shell->error_code = 1;
 			return (false);
 		}
 	}
@@ -64,16 +66,20 @@ void	my_cd(t_minishell *m_shell, char *str_exe)
 		if (!home_cd(m_shell))
 			exit(1);
 	}
-	else
+	else if (*str_exe)
 	{
 		if (chdir(str_exe) == -1)
 		{
 			printf("minishell $ cd: No such file or directory\n");
-			exit(1);
+			m_shell->error_code = 1;
 		}
 	}
-	norm_status = getcwd(new_pwd, PATH_MAX + 1);
-	if (!norm_status)
-		exit(error(3));
-	update_pwds(m_shell, old_pwd, new_pwd);
+	else
+	{
+		norm_status = getcwd(new_pwd, PATH_MAX + 1);
+		if (!norm_status)
+			exit(error(3));
+		update_pwds(m_shell, old_pwd, new_pwd);
+		m_shell->error_code = 0;
+	}
 }
