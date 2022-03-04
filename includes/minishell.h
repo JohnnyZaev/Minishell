@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 11:23:06 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/04 12:16:57 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_envs
 
 typedef struct s_minishell
 {
+	int			error_code;
 	t_envs		*envs;
 	t_str_exe	*str_exe;
 }	t_minishell;
