@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   some_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 13:11:33 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 15:53:55 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 16:14:41 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,36 @@ void	iter_ik(t_stuff *iter)
 	iter->k++;
 }
 
-void	write_word(char *dest, char *from, int size)
+int	char_is_separator(char c)
 {
-	int	i;
-
-	i = 0;
-	while (from[i] && i < size)
-	{
-		dest[i] = from[i];
-		i++;
-	}
-	dest[i] = '\0';
+	if (c == '|' || c == '<' || c == '>' || c == ';')
+		return (1);
+	if (c == ' ')
+		return (2);
+	if (c == '\0')
+		return (3);
+	return (0);
 }
 
-void	count_words_helper(char *str, t_stuff	*iter, int *words)
+int	count_words_helper(char *str, t_stuff *iter)
 {
+	int	words;
+
+	words = 0;
 	if (char_is_separator(str[iter->i + 1]) > 0
 		&& char_is_separator(str[iter->i]) == 0)
-		*words++;
+		words++;
 	if (char_is_separator(str[iter->i]) > 0
 		&& char_is_separator(str[iter->i]) < 3 && !str[iter->i + 1])
-		*words++;
+		words++;
 	if (char_is_separator(str[iter->i]) > 0
 		&& char_is_separator(str[iter->i + 1]) == 0)
-		*words++;
+		words++;
 	if (char_is_separator(str[iter->i]) == 2
 		&& char_is_separator(str[iter->i + 1]) == 0)
-		*words--;
+		words--;
 	if (char_is_separator(str[iter->i]) == 1
 		&& char_is_separator(str[iter->i + 1]) == 2)
-		*words++;
+		words++;
+	return (words);
 }

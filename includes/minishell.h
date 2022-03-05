@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/05 15:53:11 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 16:13:34 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,16 +127,14 @@ char		**comma_killer(char *str);
 void		set_flag(char *str, t_stuff *iter);
 void		iter_ik(t_stuff *iter);
 void		set_half_flag(char *str, t_stuff *iter);
-void		write_word(char *dest, char *from, int size);
-void		count_words_helper(char *str, t_stuff	*iter, int *words);
+int			char_is_separator(char c);
+int			count_words_helper(char *str, t_stuff *iter);
 // parser/inseption_split_utils.c
 void		dollar_write(t_minishell *m_shell, char *str, \
 	t_stuff *iter, char *res);
 int			flag_for_len(char c, t_stuff *iter);
 void		word_len_in_quotes(t_minishell *m_shell, char *str, t_stuff *iter);
 
-// utils/ft_split_max.c
-char		**ft_split_max(char *str, char *charset, char sep);
 // utils/ft_split_delux.c
 char		**ft_split_delux(char *str);
 

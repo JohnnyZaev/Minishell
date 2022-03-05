@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/07 16:28:21 by gvarys            #+#    #+#              #
-#    Updated: 2022/03/05 15:38:33 by gvarys           ###   ########.fr        #
+#    Updated: 2022/03/05 16:04:00 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ SRC_FILES			=	main.c\
 						utils/pipes_and_pids.c\
 						utils/execute_and_redirects.c\
 						utils/error.c\
-						utils/ft_split_max.c\
 						utils/clean.c\
 						builtins/utils.c\
 						builtins/unset.c\

@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_delux.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:44:42 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 15:53:40 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 16:13:10 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	char_is_separator(char c)
+static void	write_word(char *dest, char *from, int size)
 {
-	if (c == '|' || c == '<' || c == '>' || c == ';')
-		return (1);
-	if (c == ' ')
-		return (2);
-	if (c == '\0')
-		return (3);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (from[i] && i < size)
+	{
+		dest[i] = from[i];
+		i++;
+	}
+	dest[i] = '\0';
 }
 
 static int	count_words(char *str)
@@ -43,7 +45,7 @@ static int	count_words(char *str)
 		}
 		if (iter.flag)
 			return (-1);
-		count_words_helper(str, &iter, &words);
+		words += count_words_helper(str, &iter);
 		iter.i++;
 	}
 	return (words);
