@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:09:59 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 13:11:14 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 13:29:55 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ void	executable(t_minishell *m_shell, t_str_exe *str_exec,
 	pipe_id = which_pipe(str_exec);
 	if (builtints_handler(m_shell, str_exec->str_exe, false))
 		return ;
+	signal(SIGINT, SIG_IGN);
 	pipex->pids[i] = ft_fork();
 	if (pipex->pids[i] == 0)
 	{
-		signal(SIGINT, SIG_DFL);
+		start_signals();
 		signal(SIGQUIT, SIG_DFL);
 		if (get_next_pipe(str_exec) && get_next_pipe(str_exec)->prev->type == 5)
 			read_heredoc_process(get_next_pipe(str_exec)->prev->str_exe,
