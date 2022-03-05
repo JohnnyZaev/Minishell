@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 11:20:45 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 14:35:31 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 15:13:56 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	char_count(char *str, int *i)
 	int	k;
 	int	flag;
 
-	i = 0;
+	j = 0;
 	k = *i;
 	flag = 0;
 	while (str[*i])

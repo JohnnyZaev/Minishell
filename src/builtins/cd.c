@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:30:05 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/05 13:38:55 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 15:13:21 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static bool	home_cd(t_minishell *m_shell)
 	return (true);
 }
 
-static void	norm_helper(char *str_split, t_minishell *m_shell, \
+static void	norm_helper(char **str_split, t_minishell *m_shell, \
 	char *old_pwd, char *new_pwd)
 {
 	char	*norm_status;

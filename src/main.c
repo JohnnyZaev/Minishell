@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/05 14:00:03 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 15:18:12 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@ static void	norm_helper(t_minishell	*m_shell, char *str, t_pipes *pipex)
 	t_str_exe	*buf;
 
 	parse_str(m_shell, str);
-	ft_memset(&pipex, 0, sizeof(pipex));
+	ft_memset(pipex, 0, sizeof(pipex));
 	pipex->pid_count = pids_counter(m_shell);
 	pipex->pipe_count = pipes_counter(m_shell);
 	pipex->pipes = ft_piping(pipex->pipe_count);
 	pipex->pids = ft_piding(pipex->pid_count);
 	buf = m_shell->str_exe;
-	i = -1;
-	while (++i < pipex->pid_count && buf)
+	i = 0;
+	while (i < pipex->pid_count && buf)
 	{
-		executable(m_shell, buf, &pipex, i);
+		executable(m_shell, buf, pipex, i);
 		buf = get_next_pipe(buf);
+		i++;
 	}
 }
 
