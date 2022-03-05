@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:53:49 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 15:03:14 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 12:07:49 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,10 @@ void	envp_to_dict(t_envs **envs, char **envp)
 	{
 		parce_envp(envs, "SHLVL=1");
 	}
+	if (!search_envs(envs, "PATH"))
+		parce_envp(envs, "PATH=/Users/ereginia\
+			/.brew/bin:/usr/local/bin:/usr/bin:/bin:\
+			/usr/sbin:/sbin:/usr/local/share/dotnet:\
+			/usr/local/munki:/opt/X11/bin:~/.dotnet\
+			/tools:/Users/ereginia/.brew/bin");
 }

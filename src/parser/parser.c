@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:00:48 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/02 12:04:15 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 11:15:53 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	parse_str(t_minishell *m_shell, char *str)
 {
 	char	**str_split;
 	char	*str_temp;
-	int		i;
 
 	if (ft_strlen(str) == 0)
 		return ;
@@ -77,19 +76,16 @@ void	parse_str(t_minishell *m_shell, char *str)
 		exit(1);
 	if (ft_strlen(str_temp) == 0)
 		return ;
-	str_split = ft_split_max(str_temp, "><|;", ' ');
-	split_inseption(m_shell, str_split);
+	str_split = ft_split_delux(str_temp);
 	if (!str_split)
-		exit(1);
+	{
+		ft_putstr_fd("minishell: syntax error\n", 2);
+		return ;
+	}
+	split_inseption(m_shell, str_split);
 	free(str_temp);
 	parse_handler(m_shell, str_split);
-	i = 0;
-	while (str_split[i])
-	{
-		free(str_split[i]);
-		i++;
-	}
-	free(str_split);
+	free_split(str_split);
 }
 
 void	free_str_exe(t_str_exe *str_exe)

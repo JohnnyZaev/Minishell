@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:57:58 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 16:29:48 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 11:40:00 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	execute_builtins(t_minishell *m_shell, char *str, int id)
 		env(m_shell->envs);
 	}
 	if (id == 2)
-		my_exit(str + 5);
+		my_exit(m_shell , str + 4);
 	if (id == 3)
 		my_export(m_shell, str + 6);
 	if (id == 7)

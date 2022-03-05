@@ -6,31 +6,24 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:44:42 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/02 10:49:32 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 11:01:49 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int		char_is_separator(char c, char *charset, char separator)
+static int		char_is_separator(char c)
 {
-	int	i;
-
-	i = 0;
-	while (charset[i] != '\0')
-	{
-		if (c == charset[i])
-			return (1);
-		i++;
-	}
-	if (c == separator)
-	    return (2);
+	if (c == '|' || c == '<' || c == '>' || c == ';')
+		return (1);
+	if (c == ' ')
+		return (2);
 	if (c == '\0')
 		return (3);
 	return (0);
 }
 
-static int		count_words(char *str, char *charset, char sep)
+static int		count_words(char *str)
 {
 	int	i;
 	int flag;
@@ -54,21 +47,21 @@ static int		count_words(char *str, char *charset, char sep)
 				flag = !flag;
 		}
 		if (flag)
-		    return -1;
-		if (char_is_separator(str[i + 1], charset, sep) > 0
-				&& char_is_separator(str[i], charset, sep) == 0)
+			return -1;
+		if (char_is_separator(str[i + 1]) > 0
+				&& char_is_separator(str[i]) == 0)
 			words++;
-		if (char_is_separator(str[i], charset, sep) > 0
-				&& char_is_separator(str[i], charset, sep) < 3 && !str[i + 1])
+		if (char_is_separator(str[i]) > 0
+				&& char_is_separator(str[i]) < 3 && !str[i + 1])
 			words++;
-		if (char_is_separator(str[i], charset, sep) > 0
-				&& char_is_separator(str[i + 1], charset, sep) == 0)
+		if (char_is_separator(str[i]) > 0
+				&& char_is_separator(str[i + 1]) == 0)
 			words++;
-		if (char_is_separator(str[i], charset, sep) == 2
-				&& char_is_separator(str[i + 1], charset, sep) == 0)
+		if (char_is_separator(str[i]) == 2
+				&& char_is_separator(str[i + 1]) == 0)
 			words--;
-		if (char_is_separator(str[i], charset, sep) == 1
-				&& char_is_separator(str[i + 1], charset, sep) == 2)
+		if (char_is_separator(str[i]) == 1
+				&& char_is_separator(str[i + 1]) == 2)
 			words++;
 		i++;
 	}
@@ -82,51 +75,51 @@ static void	write_word(char *dest, char *from, int size)
 	i = 0;
 	while (from[i] && i < size)
 	{
-	    dest[i] = from[i];
-	    i++;
+		dest[i] = from[i];
+		i++;
 	}
 	dest[i] = '\0';
 }
 
-static int  one_word(char *str, char *charset, char sep)
+static int one_word(char *str)
 {
-    int j;
-    int flag;
-    
-    j = 0;
-    flag = 0;
-    while (str[j] && char_is_separator(str[j], charset, sep) == 0)
-    {
+	int j;
+	int flag;
+
+	j = 0;
+	flag = 0;
+	while (str[j] && char_is_separator(str[j]) == 0)
+	{
 		if (str[j] == '\'')
 			flag = 1;
 		if (str[j] == '\"')
 			flag = 2;
 		if (flag)
 		{
-    		while (str[j] && flag)
-    		{
-    			j++;
-    			if (str[j] == '\'' && flag == 1)
-    				flag = !flag;
-    			if (str[j] == '\"' && flag == 2)
-    				flag = !flag;
-    		}
-    		j++;
-    		flag = 0;
-    		continue ;
+			while (str[j] && flag)
+			{
+				j++;
+				if (str[j] == '\'' && flag == 1)
+					flag = !flag;
+				if (str[j] == '\"' && flag == 2)
+					flag = !flag;
+			}
+			j++;
+			flag = 0;
+			continue ;
 		}
-        while (str[j] && char_is_separator(str[j], charset, sep) == 0 && str[j] != '\'' && str[j] != '\"')
-            j++;
-    }
-    return j;
+		while (str[j] && char_is_separator(str[j]) == 0 && str[j] != '\'' && str[j] != '\"')
+			j++;
+	}
+	return (j);
 }
 
-static void	write_split(char **split, char *str, char *charset, char sep)
+static void	write_split(char **split, char *str)
 {
 	int		i;
 	int		j;
 	int		word;
-	int     flag;
+	int		flag;
 
 	word = 0;
 	flag = 0;
@@ -134,14 +127,14 @@ static void	write_split(char **split, char *str, char *charset, char sep)
 	while (str[i] != '\0')
 	{
 		j = 0;
-		while (char_is_separator(str[i + j], charset, sep) == 2)
+		while (char_is_separator(str[i + j]) == 2)
 			i++;
 		if (!str[i])
-		    return ;
-        j = one_word(&str[i], charset, sep);
-		if (char_is_separator(str[i + j], charset, sep) == 1 && j == 0)
+			return ;
+		j = one_word(&str[i]);
+		if (char_is_separator(str[i + j]) == 1 && j == 0)
 		{
-			while(char_is_separator(str[i + j], charset, sep) == 1 && str[i + j] != '\0')
+			while(char_is_separator(str[i + j]) == 1 && str[i + j] != '\0')
 				j++;
 		}
 		split[word] = (char*)malloc(sizeof(char) * (j + 1));
@@ -151,16 +144,16 @@ static void	write_split(char **split, char *str, char *charset, char sep)
 	}
 }
 
-char	**ft_split_delux(char *str, char *charset, char sep)
+char	**ft_split_delux(char *str)
 {
 	char	**res;
 	int		words;
 
-	words = count_words(str, charset, sep);
+	words = count_words(str);
 	if (words < 0)
-	    return (NULL);
+		return (NULL);
 	res = (char**)malloc(sizeof(char*) * (words + 1));
-	write_split(res, str, charset, sep);
+	write_split(res, str);
 	res[words] = 0;
 	return (res);
 }
@@ -171,12 +164,12 @@ char	**ft_split_delux(char *str, char *charset, char sep)
 // 	char **spt;
 
 // 	printf("%d\n", count_words(argv[1]));
-// 	// spt = ft_split_delux(str);
-// 	// while(spt[i])
-// 	// {
-// 	// 	printf("elem - %s\n", spt[i]);
-// 	// 	free(spt[i]);
-// 	// 	i++;
-// 	// }
-// 	// free(spt);
+// 	spt = ft_split_delux(str);
+// 	while(spt[i])
+// 	{
+// 		printf("elem - %s\n", spt[i]);
+// 		free(spt[i]);
+// 		i++;
+// 	}
+// 	free(spt);
 // }

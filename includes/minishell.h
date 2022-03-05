@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 12:58:54 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 11:34:30 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char **comma_killer(char *str);
 // utils/ft_split_max.c
 char	**ft_split_max(char *str, char *charset, char sep);
 // utils/ft_split_delux.c
-char	**ft_split_delux(char *str, char *charset, char sep);
+char	**ft_split_delux(char *str);
 
 // utils/clean.c
 void		free_split(char **tofree);
@@ -135,7 +135,7 @@ char		**get_envp(t_envs *envs);
 int			builtints_handler(t_minishell *m_shell, char *str, bool flag);
 void		unset(t_minishell *m_shell, char *str_exe);
 void		env(t_envs *envs);
-void		my_exit(char *str_exe);
+void		my_exit(t_minishell *m_shell, char *str_exe);
 void		my_pwd(void);
 void		my_export(t_minishell *m_shell, char *str_exe);
 void		my_cd(t_minishell *m_shell, char *str_exe);

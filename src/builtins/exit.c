@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:50:37 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 16:04:44 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 11:41:28 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
-void	my_exit(char *str_exe)
+void	my_exit(t_minishell *m_shell, char *str_exe)
 {
 	int	i;
-	
-	if (!str_exe)
-		exit(0);
+
+	if (!str_exe[0])
+		exit(m_shell->error_code);
 	else
 	{
-		i = 0;
+		i = 1;
 		while (str_exe[i])
 		{
 			if (!(ft_isdigit(str_exe[i])))
