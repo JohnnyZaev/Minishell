@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envs_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:31:08 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/23 17:19:46 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 13:47:42 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,33 @@ void	remove_envs(t_envs **envs, char *key)
 		}
 		temp = temp->next;
 	}
+}
+
+char	**get_envp(t_envs *envs)
+{
+	char	**result;
+	char	*temp;
+	t_envs	*buf;
+	int		words;
+
+	words = 0;
+	buf = envs;
+	while (buf)
+	{
+		buf = buf->next;
+		words++;
+	}
+	result = (char **)malloc(sizeof(char *) * (words + 1));
+	words = 0;
+	buf = envs;
+	while (buf)
+	{
+		temp = ft_strjoin(buf->key, "=");
+		result[words] = ft_strjoin(temp, buf->value);
+		free(temp);
+		buf = buf->next;
+		words++;
+	}
+	result[words] = NULL;
+	return (result);
 }

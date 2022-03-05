@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:09:59 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 13:29:55 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 13:52:13 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,20 @@ static void	pipe_laying(t_str_exe *str_exec, t_pipes *pipex, int pipe_id)
 	}
 }
 
+static void	norm_helper(t_str_exe *str_exec, t_pipes *pipex, \
+	t_minishell *m_shell, int pipe_id)
+{
+	start_signals();
+	signal(SIGQUIT, SIG_DFL);
+	if (get_next_pipe(str_exec) && get_next_pipe(str_exec)->prev->type == 5)
+		read_heredoc_process(get_next_pipe(str_exec)->prev->str_exe,
+			pipex->pipes[pipe_id][1]);
+	pipe_laying(str_exec, pipex, pipe_id);
+	redirect_handle(str_exec);
+	buildins_or_binary(m_shell, str_exec);
+	exit(1);
+}
+
 void	executable(t_minishell *m_shell, t_str_exe *str_exec,
 	t_pipes *pipex, int i)
 {
@@ -69,17 +83,7 @@ void	executable(t_minishell *m_shell, t_str_exe *str_exec,
 	signal(SIGINT, SIG_IGN);
 	pipex->pids[i] = ft_fork();
 	if (pipex->pids[i] == 0)
-	{
-		start_signals();
-		signal(SIGQUIT, SIG_DFL);
-		if (get_next_pipe(str_exec) && get_next_pipe(str_exec)->prev->type == 5)
-			read_heredoc_process(get_next_pipe(str_exec)->prev->str_exe,
-				pipex->pipes[pipe_id][1]);
-		pipe_laying(str_exec, pipex, pipe_id);
-		redirect_handle(str_exec);
-		buildins_or_binary(m_shell, str_exec);
-		exit(1);
-	}
+		norm_helper(str_exec, pipex, m_shell, pipe_id);
 	if (str_exec && (str_exec->type == 2 || str_exec->type == 0
 			|| (get_next_pipe(str_exec)
 				&& get_next_pipe(str_exec)->prev->type == 5)))

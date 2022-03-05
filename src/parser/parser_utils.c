@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:09:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 11:19:42 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:24:26 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_str_exe	*parse_redirects(t_minishell *m_shell, t_str_exe *temp, char **str, int *i)
+static t_str_exe	*parse_redirects(t_minishell *m_shell, t_str_exe *temp, \
+	char **str, int *i)
 {
-	int m;
+	int	m;
 
 	m = *i;
 	while (str[m] && type_searcher(str[m]) != 1 && type_searcher(str[m]) != 2)
