@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:44:42 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 16:13:10 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 17:38:30 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,9 @@ static void	write_word(char *dest, char *from, int size)
 
 static int	count_words(char *str)
 {
-	int		words;
 	t_stuff	iter;
 
 	ft_memset(&iter, 0, sizeof(iter));
-	words = 0;
 	while (str[iter.i])
 	{
 		set_half_flag(str, &iter);
@@ -45,10 +43,10 @@ static int	count_words(char *str)
 		}
 		if (iter.flag)
 			return (-1);
-		words += count_words_helper(str, &iter);
+		iter.k += count_words_helper(str, &iter);
 		iter.i++;
 	}
-	return (words);
+	return (iter.k);
 }
 
 static int	one_word(char *str)
