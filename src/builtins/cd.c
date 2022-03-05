@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:30:05 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/04 15:58:00 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/05 13:38:55 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,26 @@ static bool	home_cd(t_minishell *m_shell)
 	return (true);
 }
 
+static void	norm_helper(char *str_split, t_minishell *m_shell, \
+	char *old_pwd, char *new_pwd)
+{
+	char	*norm_status;
+
+	if (chdir(str_split[1]) == -1)
+	{
+		printf("minishell $ cd: No such file or directory\n");
+		m_shell->error_code = 1;
+	}
+	else
+	{
+		norm_status = getcwd(new_pwd, PATH_MAX + 1);
+		if (!norm_status)
+			exit(error(3));
+		update_pwds(m_shell, old_pwd, new_pwd);
+		m_shell->error_code = 0;
+	}
+}
+
 void	my_cd(t_minishell *m_shell, char *str_exe)
 {
 	char	old_pwd[PATH_MAX + 1];
@@ -69,20 +89,6 @@ void	my_cd(t_minishell *m_shell, char *str_exe)
 			exit(1);
 	}
 	else if (str_split[1])
-	{
-		if (chdir(str_split[1]) == -1)
-		{
-			printf("minishell $ cd: No such file or directory\n");
-			m_shell->error_code = 1;
-		}
-		else
-		{
-			norm_status = getcwd(new_pwd, PATH_MAX + 1);
-			if (!norm_status)
-				exit(error(3));
-			update_pwds(m_shell, old_pwd, new_pwd);
-			m_shell->error_code = 0;
-		}
-	}
+		norm_helper(str_split, m_shell, old_pwd, new_pwd);
 	free_split(str_split);
 }
