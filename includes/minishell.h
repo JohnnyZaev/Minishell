@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/05 11:34:30 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 13:14:37 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@
 # define REDIRECT_OUT 4
 # define HEREDOC 5
 # define REDIRECT_AP 6
+
+typedef struct s_stuff
+{
+	int		i;
+	int		j;
+	int		k;
+	int		flag;
+	char	*buf;
+}	t_stuff;
 
 typedef struct s_pipes
 {

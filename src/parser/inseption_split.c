@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:52:41 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 13:05:00 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 13:07:34 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,17 @@ static int word_len(t_minishell *m_shell, char *str)
 			if (str[i] == '\"' && flag == 2)
 				flag = 3;
 			if (str[i] == '$' && flag != 1)
-			    k = k + dollar_len(m_shell, &str[i], &i);
+				k = k + dollar_len(m_shell, &str[i], &i);
 			else
 			{
-			    k++;
-			    i++;
+				k++;
+				i++;
 			}
 		}
 		if (flag == 3)
 		{
-		    flag = 0;
-		    continue ;
+			flag = 0;
+			continue ;
 		}
 		if (str[i] && !flag)
 		{
