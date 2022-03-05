@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/05 13:14:37 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 15:10:01 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,18 @@ t_str_exe	*create_str_exe(char *content);
 // parser/parser_utils.c
 void		parse_handler(t_minishell *m_shell, char **str);
 // parser/inseption_split.c
-void split_inseption(t_minishell *m_shell, char **spt);
+void	split_inseption(t_minishell *m_shell, char **spt);
+int		dollar_len(t_minishell *m_shell, char *str, int *l);
 // parser/comma_killer.c
-char **comma_killer(char *str);
+char	**comma_killer(char *str);
+// parser/some_staff.c
+void	set_flag(char *str, t_stuff *iter);
+void	iter_ik(t_stuff *iter);
+void	set_half_flag(char *str, t_stuff *iter);
+// parser/inseption_split_utils.c
+void	dollar_write(t_minishell *m_shell, char *str, t_stuff *iter, char *res);
+int		flag_for_len(char c, t_stuff *iter);
+void	word_len_in_quotes(t_minishell *m_shell, char *str, t_stuff *iter);
 
 // utils/ft_split_max.c
 char	**ft_split_max(char *str, char *charset, char sep);
