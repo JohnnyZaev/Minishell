@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:28:18 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/05 13:14:37 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 15:53:11 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_stuff
 typedef struct s_pipes
 {
 	int	**pipes;
-	int *pids;
+	int	*pids;
 	int	pipe_count;
 	int	pid_count;
 }	t_pipes;
@@ -85,14 +85,15 @@ void		ft_pipe(int *fd);
 //pipes_and_pids.c
 int			**ft_piping(int count);
 int			*ft_piding(int count);
-void		close_unusedpipes(int **pipes, int pipe_num1, int pipe_num2, int count);
+void		close_unusedpipes(int **pipes, int pipe_num1, \
+	int pipe_num2, int count);
 void		wait_all_pids(int pids_count);
 
 //execute_and_redirects.c
-void	execute_process(char *c_line, t_minishell *m_shell);
-void	read_redirect(char *file_path);
-void	write_redirect(char *file_path, int mode);
-void	read_heredoc_process(char *stop, int fd);
+void		execute_process(char *c_line, t_minishell *m_shell);
+void		read_redirect(char *file_path);
+void		write_redirect(char *file_path, int mode);
+void		read_heredoc_process(char *stop, int fd);
 //envp.c
 void		envp_to_dict(t_envs **envs, char **envp);
 char		*search_envs(t_envs **envs, char *key);
@@ -118,21 +119,34 @@ t_str_exe	*create_str_exe(char *content);
 // parser/parser_utils.c
 void		parse_handler(t_minishell *m_shell, char **str);
 // parser/inseption_split.c
-void split_inseption(t_minishell *m_shell, char **spt);
+void		split_inseption(t_minishell *m_shell, char **spt);
+int			dollar_len(t_minishell *m_shell, char *str, int *l);
 // parser/comma_killer.c
-char **comma_killer(char *str);
+char		**comma_killer(char *str);
+// parser/some_staff.c
+void		set_flag(char *str, t_stuff *iter);
+void		iter_ik(t_stuff *iter);
+void		set_half_flag(char *str, t_stuff *iter);
+void		write_word(char *dest, char *from, int size);
+void		count_words_helper(char *str, t_stuff	*iter, int *words);
+// parser/inseption_split_utils.c
+void		dollar_write(t_minishell *m_shell, char *str, \
+	t_stuff *iter, char *res);
+int			flag_for_len(char c, t_stuff *iter);
+void		word_len_in_quotes(t_minishell *m_shell, char *str, t_stuff *iter);
 
 // utils/ft_split_max.c
-char	**ft_split_max(char *str, char *charset, char sep);
+char		**ft_split_max(char *str, char *charset, char sep);
 // utils/ft_split_delux.c
-char	**ft_split_delux(char *str);
+char		**ft_split_delux(char *str);
 
 // utils/clean.c
 void		free_split(char **tofree);
 
 // executable/exe.c
-void		executable(t_minishell	*m_shell, t_str_exe *str_exec, t_pipes *pipex, int i);
-t_str_exe   *get_next_pipe(t_str_exe *str_exec);
+void		executable(t_minishell	*m_shell, t_str_exe *str_exec, \
+	t_pipes *pipex, int i);
+t_str_exe	*get_next_pipe(t_str_exe *str_exec);
 int			pipe_type(t_str_exe *str_exec);
 int			pipes_counter(t_minishell	*m_shell);
 int			pids_counter(t_minishell	*m_shell);

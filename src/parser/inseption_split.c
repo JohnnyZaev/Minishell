@@ -6,16 +6,16 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 10:52:41 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 13:07:34 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/05 15:01:41 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int is_dollar(char *str)
+static int	is_dollar(char *str)
 {
-	int i;
-	int flag;
+	int	i;
+	int	flag;
 
 	i = 0;
 	flag = 0;
@@ -36,137 +36,82 @@ static int is_dollar(char *str)
 	return (0);
 }
 
-static int dollar_len(t_minishell *m_shell, char *str, int *l)
+int	dollar_len(t_minishell *m_shell, char *str, int *l)
 {
-	int i;
-	int k;
-	char *buf;
+	t_stuff	iter;
 
-	i = 0;
-	k = 0;
-	while (str[i + 1] && (ft_isalnum(str[i + 1]) || str[i + 1] == '?'))
-		i++;
-	*l = *l + i + 1;
-	buf = ft_substr(str, 1, i);
-	if (!ft_strncmp(buf, "?", 2))
+	ft_memset(&iter, 0, sizeof(iter));
+	while (str[iter.i + 1] && (ft_isalnum(str[iter.i + 1])
+			|| str[iter.i + 1] == '?'))
+		iter.i++;
+	*l = *l + iter.i + 1;
+	iter.buf = ft_substr(str, 1, iter.i);
+	if (!ft_strncmp(iter.buf, "?", 2))
 	{
-		k++;
-		while (i / 10)
+		iter.k++;
+		while (iter.i / 10)
 		{
-			i = i / 10;
-			k++;
+			iter.i = iter.i / 10;
+			iter.k++;
 		}
 	}
 	else
-		k = ft_strlen(search_envs(&m_shell->envs, buf));
-	free(buf);
-	return (k);
+		iter.k = ft_strlen(search_envs(&m_shell->envs, iter.buf));
+	free(iter.buf);
+	return (iter.k);
 }
 
-static int word_len(t_minishell *m_shell, char *str)
+static int	word_len(t_minishell *m_shell, char *str)
 {
-	int i = 0;
-	int k = 0;
-	int flag = 0;
+	t_stuff	iter;
 
-	while (str[i])
+	ft_memset(&iter, 0, sizeof(iter));
+	while (str[iter.i])
 	{
-		if (str[i] == '\'' && flag == 0)
+		if (flag_for_len(str[iter.i], &iter))
+			continue ;
+		while (str[iter.i] && iter.flag)
+			word_len_in_quotes(m_shell, str, &iter);
+		if (iter.flag == 3)
 		{
-			flag = 1;
-			k++;
-			i++;
+			iter.flag = 0;
 			continue ;
 		}
-		if (str[i] == '\"' && flag == 0)
+		if (str[iter.i] && !iter.flag)
 		{
-			flag = 2;
-			k++;
-			i++;
-			continue ;
-		}
-		while (str[i] && flag)
-		{
-			if (str[i] == '\'' && flag == 1)
-				flag = 3;
-			if (str[i] == '\"' && flag == 2)
-				flag = 3;
-			if (str[i] == '$' && flag != 1)
-				k = k + dollar_len(m_shell, &str[i], &i);
+			if (str[iter.i] == '$')
+				iter.k = iter.k + dollar_len(m_shell, &str[iter.i], &iter.i);
 			else
-			{
-				k++;
-				i++;
-			}
-		}
-		if (flag == 3)
-		{
-			flag = 0;
-			continue ;
-		}
-		if (str[i] && !flag)
-		{
-			if (str[i] == '$')
-				k = k + dollar_len(m_shell, &str[i], &i);
-			else
-			{
-				k++;
-				i++;
-			}
+				iter_ik(&iter);
 		}
 	}
-	return (k);
+	return (iter.k);
 }
 
-static char *word_replace(t_minishell *m_shell, char *str)
+static char	*word_replace(t_minishell *m_shell, char *str)
 {
 	char	*res;
-	char	*buf;
-	char	*temp;
-	int		i = 0;
-	int		j = 0;
-	int		k = 0;
-	int		flag = 0;
+	t_stuff	iter;
 
+	ft_memset(&iter, 0, sizeof(iter));
 	res = (char *)malloc(sizeof(char) * word_len(m_shell, str) + 1);
-	while (str[i])
+	while (str[iter.i])
 	{
-		if (str[i] == '\'' && flag == 0)
-			flag = 1;
-		else if (str[i] == '\'' && flag == 1)
-			flag = 0;
-		if (str[i] == '\"' && flag == 0)
-			flag = 2;
-		else if (str[i] == '\"' && flag == 2)
-			flag = 0;
-		if (str[i] != '$' || flag == 1)
-			res[k] = str[i];
+		set_flag(str, &iter);
+		if (str[iter.i] != '$' || iter.flag == 1)
+			res[iter.k] = str[iter.i];
 		else
 		{
-			while (str[i + j + 1] && (ft_isalnum(str[i + j + 1]) || str[i + j + 1] == '?'))
-				j++;
-			buf = ft_substr(&str[i], 1, j);
-			if (!ft_strncmp(buf, "?", 2))
-				temp = ft_itoa(m_shell->error_code);
-			else
-				temp = search_envs(&m_shell->envs, buf);
-			ft_strlcpy(&res[k], temp, ft_strlen(temp) + 1);
-			k = k + ft_strlen(temp);
-			if (!search_envs(&m_shell->envs, buf))
-				free(temp);
-			free(buf);
-			i = i + j + 1;
-			j = 0;
+			dollar_write(m_shell, str, &iter, res);
 			continue ;
 		}
-		i++;
-		k++;
+		iter_ik(&iter);
 	}
-	res[k] = '\0';
+	res[iter.k] = '\0';
 	return (res);
 }
 
-void split_inseption(t_minishell *m_shell, char **spt)
+void	split_inseption(t_minishell *m_shell, char **spt)
 {
 	int		i;
 	char	*buf;
