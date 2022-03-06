@@ -6,14 +6,14 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:00:45 by ereginia          #+#    #+#             */
-/*   Updated: 2022/02/23 16:29:43 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/06 20:14:21 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//создание массива пайпов
-//(каждый пайп это int pipe[2] - массив из двух элементов)
+//make pipe array
+//each pipe is array[2]
 int	**ft_piping(int count)
 {
 	int	i;
@@ -43,7 +43,7 @@ int	**ft_piping(int count)
 	return (p_pipes);
 }
 
-//выделение места под массив PID
+//allocate PID array
 int	*ft_piding(int count)
 {
 	int	i;
@@ -54,7 +54,7 @@ int	*ft_piding(int count)
 	return (p_pids);
 }
 
-//закрываем неиспользуемые дескрипторы
+//close unused fd
 void	close_unusedpipes(int **pipes, int pipe_num1, int pipe_num2, int count)
 {
 	int	i;
@@ -71,7 +71,7 @@ void	close_unusedpipes(int **pipes, int pipe_num1, int pipe_num2, int count)
 	}
 }
 
-//ждем смерти всех дочерних процессов
+//w8 for child
 void	wait_all_pids(int pids_count)
 {
 	int	i;

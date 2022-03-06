@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:38:24 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 11:59:14 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/06 20:14:22 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//проверяет существует ли такой бинарник
-//если существует то возвращает строку = полный путь
-//если не существует то возвращает NULL
+//check binary
+//if exist -> return path
+//else -> null
 char	*ft_exist(char *env, char *cmd)
 {
 	char	**path;
@@ -43,7 +43,7 @@ char	*ft_exist(char *env, char *cmd)
 	return (NULL);
 }
 
-//простой вызов dup2 обернутый обработкой ошибок
+//dup2 with error check
 int	ft_dup(int old, int newfd)
 {
 	int	buf;
@@ -57,7 +57,7 @@ int	ft_dup(int old, int newfd)
 	return (buf);
 }
 
-//простой вызов fork обернутый обработкой ошибок
+//fork with error check
 int	ft_fork(void)
 {
 	int	pid;
@@ -71,7 +71,7 @@ int	ft_fork(void)
 	return (pid);
 }
 
-//простой вызов pipe обернутый обработкой ошибок
+//pipe with error check
 void	ft_pipe(int *fd)
 {
 	if (pipe(fd) == -1)

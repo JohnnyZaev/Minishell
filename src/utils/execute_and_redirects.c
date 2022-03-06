@@ -6,13 +6,13 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:26:23 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/04 15:11:13 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/06 20:14:26 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//запускает бинарник
+//execute binary file
 void	execute_process(char *c_line, t_minishell *m_shell)
 {
 	char	**arg_vec1;
@@ -42,7 +42,7 @@ void	execute_process(char *c_line, t_minishell *m_shell)
 	exit(EXIT_SUCCESS);
 }
 
-//открывает файл и перенаправляет в stdin
+//open a file and dup it to stdin
 void	read_redirect(char *file_path)
 {
 	int	fd_in;
@@ -58,7 +58,7 @@ void	read_redirect(char *file_path)
 	ft_dup(fd_in, 0);
 }
 
-//открывает/создает файл и перенаправляет stdout в файл
+//open or create file and dup it to stdout
 void	write_redirect(char *file_path, int mode)
 {
 	int	fd_out;

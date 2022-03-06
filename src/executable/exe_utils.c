@@ -6,13 +6,13 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 13:25:13 by ereginia          #+#    #+#             */
-/*   Updated: 2022/03/05 13:47:20 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/06 20:14:27 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//количество процессов нужно запустить
+//check how much forks we need
 int	pids_counter(t_minishell *m_shell)
 {
 	t_str_exe	*buf;
@@ -71,7 +71,7 @@ int	pipe_type(t_str_exe *str_exec)
 	return (i + 2 * j);
 }
 
-//номер пайпы сзади
+//number of bottom pipe
 int	which_pipe(t_str_exe *str_exec)
 {
 	t_str_exe	*buf;

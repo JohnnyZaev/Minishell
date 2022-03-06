@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:38:16 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/05 15:18:12 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/03/06 20:14:19 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,22 +84,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	char		*str;
-// 	t_minishell	m_shell;
-
-// 	(void) argc;
-// 	str = argv[1];
-//     // str = "\"ls\" pwd\"<file3\"fe$PWDefwg4 <file2 | wc";
-//     // str = "\"$HOME $PWD\"pwd";
-//     // str = "'$HOSTNAME' '$PWD '";
-//     str = "$HOME_$PWD"; //1
-// 	memset(&m_shell, 0, sizeof(m_shell));
-// 	envp_to_dict(&m_shell.envs, envp);
-// 	exe_handler(&m_shell, str);
-// 	free_str_exe(m_shell.str_exe);
-// 	m_shell.str_exe = NULL;
-// 	return (0);
-// }
