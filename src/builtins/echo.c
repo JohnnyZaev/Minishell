@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:59:10 by gvarys            #+#    #+#             */
-/*   Updated: 2022/03/05 16:18:24 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/03/07 20:51:59 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	norm_helper(char **str_split, bool flag)
+static bool	norm_helper(char **str_split, bool flag)
 {
 	int	i;
 
@@ -35,6 +35,7 @@ static void	norm_helper(char **str_split, bool flag)
 		free(str_split[i]);
 		i++;
 	}
+	return (flag);
 }
 
 void	my_echo(char *str_exe, t_minishell *m_shell)
@@ -48,7 +49,7 @@ void	my_echo(char *str_exe, t_minishell *m_shell)
 		str_split = comma_killer(str_exe);
 		if (!str_split)
 			exit(error(1));
-		norm_helper(str_split, flag);
+		flag = norm_helper(str_split, flag);
 		free(str_split);
 	}
 	if (flag)
